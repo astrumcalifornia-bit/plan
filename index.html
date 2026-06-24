@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astrum Pilot Transition — Project Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}
+body{margin:0;background:#F4F1EA;font-family:'Work Sans',system-ui,sans-serif;color:#3A2B23}
+.page{width:1180px;max-width:100%;margin:0 auto;background:#fff;padding:56px}
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:22px;border-bottom:2px solid #3F5743}
+.kicker{font-size:12px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#C3744A;margin-bottom:10px}
+.title{margin:0;font-size:38px;font-weight:700;letter-spacing:-0.5px;line-height:1}
+.hdr-meta{text-align:right;font-size:13px;line-height:1.6;color:#7C6F64}
+.hdr-meta b{font-weight:600;color:#3F5743;letter-spacing:0.5px}
+.sec{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#A89C8E;margin-top:34px;margin-bottom:18px}
+.g-head{display:grid;grid-template-columns:230px 1fr}
+.g-wsl{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#A89C8E;align-self:end;padding-bottom:10px}
+.g-wks{display:grid;grid-template-columns:repeat(5,1fr)}
+.g-wk{font-size:11.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-align:center;color:#5A4D43;padding-bottom:10px;border-bottom:1.5px solid #E4DCCB}
+.g-row{display:grid;grid-template-columns:230px 1fr;border-bottom:1px solid #F0ECE2}
+.g-name{display:flex;align-items:center;font-size:13.5px;font-weight:500;color:#3A2B23;padding-right:14px;height:48px}
+.g-track{position:relative;display:grid;grid-template-columns:repeat(5,1fr);height:48px}
+.g-line{grid-row:1;border-right:1px solid #F0ECE2;align-self:stretch}
+.g-seg{grid-row:1;align-self:center;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;margin:0 3px}
+.g-seg span{font-size:9px;font-weight:600;letter-spacing:1.5px}
+.legend{display:flex;align-items:center;gap:26px;margin-top:18px}
+.lg{display:flex;align-items:center;gap:8px}
+.lg-sw{width:24px;height:12px;border-radius:3px}
+.lg span{font-size:12px;color:#5A4D43}
+.lg-mini-wrap{display:flex;align-items:center;gap:16px;margin-left:auto}
+.lg-mini{display:flex;align-items:center;gap:7px}
+.lg-mini-sw{width:11px;height:11px;border-radius:3px}
+.dp{display:flex;align-items:center;justify-content:space-between;margin-top:52px;padding-top:30px;border-top:2px solid #3F5743}
+.dp-kicker{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#A89C8E;margin-bottom:6px}
+.dp-title{font-size:22px;font-weight:700;letter-spacing:-0.3px}
+.dp-right{text-align:right;min-width:220px}
+.dp-prog-txt{font-size:12px;color:#7C6F64;margin-bottom:7px}
+.dp-prog-txt strong{color:#3F5743;font-weight:700}
+.dp-track{width:220px;height:6px;background:#EFE9DC;border-radius:4px;overflow:hidden}
+.dp-bar{height:100%;width:0%;background:#3F5743;border-radius:4px;transition:width 240ms cubic-bezier(.4,0,.2,1)}
+.ph-band{display:flex;align-items:center;justify-content:space-between;background:var(--accent);color:#fff;padding:13px 20px;border-radius:6px;margin-top:36px}
+.ph-name{font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.ph-week{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;opacity:.85}
+.ready{display:flex;align-items:center;gap:12px;background:color-mix(in srgb,var(--accent) 9%,#fff);border:1px solid color-mix(in srgb,var(--accent) 28%,#fff);border-radius:6px;padding:12px 16px;margin-top:10px}
+.ready-dot{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.ready-check{display:block;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.ready-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent)}
+.ready-text{font-size:13.5px;font-weight:500;color:#3A2B23}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.card{border:1px solid #EBE4D5;border-radius:8px;padding:17px 18px 15px;background:#fff;display:flex;flex-direction:column}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-title{font-size:14.5px;font-weight:600;color:#3A2B23;line-height:1.32}
+.counter{flex-shrink:0;font-size:11px;font-weight:600;color:#8A7D70;background:#F4EFE3;padding:3px 9px;border-radius:11px;white-space:nowrap}
+.badge-row{margin-top:9px}
+.badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:4px}
+.b-metric{background:color-mix(in srgb,#3F5743 13%,#fff);color:#3F5743}
+.b-review{background:color-mix(in srgb,#C3744A 16%,#fff);color:#A85A33}
+.b-decision{background:color-mix(in srgb,#3A2B23 12%,#fff);color:#3A2B23}
+.b-safety{background:#3A2B23;color:#fff}
+.desc{font-size:12.5px;color:#8A7D70;line-height:1.5;margin-top:9px}
+.checklist{margin-top:13px;padding-top:11px;border-top:1px solid #F2ECDF;display:flex;flex-direction:column;gap:2px}
+.ck{display:flex;align-items:flex-start;gap:10px;padding:5px 0;cursor:pointer}
+.box{flex-shrink:0;width:18px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:1px;border:1.5px solid #CDC2AC;background:#fff}
+.mark{display:none;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.lbl{font-size:13px;line-height:1.42;color:#5A4D43;text-decoration:none}
+.ck.on .box{background:var(--accent);border-color:var(--accent)}
+.ck.on .mark{display:block}
+.ck.on .lbl{color:#B3A795;text-decoration:line-through}</style>
+</head>
+<body>
+<div class="page">
+  <div class="hdr">
+    <div>
+      <div class="kicker">Bakery Transition · Project Plan</div>
+      <h1 class="title">Astrum Pilot Transition</h1>
+    </div>
+    <div class="hdr-meta"><b>5-WEEK ROLLOUT</b><div>Pre-Launch &rarr; Week 4</div></div>
+  </div>
+
+  <div class="sec">Timeline Overview</div>
+  <div class="g-head"><div class="g-wsl">Workstream</div><div class="g-wks"><div class="g-wk">Pre-Launch</div><div class="g-wk">Week 1</div><div class="g-wk">Week 2</div><div class="g-wk">Week 3</div><div class="g-wk">Week 4</div></div></div>
+  <div class="g-row"><div class="g-name">Legal &amp; Setup</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:1 / 2;background:#3A2B23;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">Knowledge Transfer</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:1 / 3;background:#3A2B23;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">TTK Development</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:1 / 5;background:#3F5743;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">Phase 1 — Coffee &amp; Drinks</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:1 / 2;background:color-mix(in srgb, #C3744A 24%, #ffffff);"><span style="color:#C3744A;">PREP</span></div><div class="g-seg" style="grid-column:2 / 6;background:#C3744A;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">Phase 2 — Croissants</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:2 / 3;background:color-mix(in srgb, #C3744A 24%, #ffffff);"><span style="color:#C3744A;">PREP</span></div><div class="g-seg" style="grid-column:3 / 6;background:#C3744A;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">Phase 3 — Sandwiches</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:3 / 4;background:color-mix(in srgb, #C3744A 24%, #ffffff);"><span style="color:#C3744A;">PREP</span></div><div class="g-seg" style="grid-column:4 / 6;background:#C3744A;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">Phase 4 — Ready Food</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:4 / 5;background:color-mix(in srgb, #C3744A 24%, #ffffff);"><span style="color:#C3744A;">PREP</span></div><div class="g-seg" style="grid-column:5 / 6;background:#C3744A;"><span style="color:transparent;"></span></div></div></div>
+  <div class="g-row"><div class="g-name">Marketing &amp; Instagram</div><div class="g-track"><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-line"></div><div class="g-seg" style="grid-column:1 / 6;background:#3F5743;"><span style="color:transparent;"></span></div></div></div>
+
+  <div class="legend">
+    <div class="lg"><div class="lg-sw" style="background:color-mix(in srgb,#C3744A 24%,#fff)"></div><span>Preparation</span></div>
+    <div class="lg"><div class="lg-sw" style="background:#C3744A"></div><span>Active / Live</span></div>
+    <div class="lg-mini-wrap">
+      <div class="lg-mini"><div class="lg-mini-sw" style="background:#3A2B23"></div><span style="font-size:12px;color:#5A4D43">Foundation</span></div>
+      <div class="lg-mini"><div class="lg-mini-sw" style="background:#3F5743"></div><span style="font-size:12px;color:#5A4D43">Continuous</span></div>
+      <div class="lg-mini"><div class="lg-mini-sw" style="background:#C3744A"></div><span style="font-size:12px;color:#5A4D43">Menu Phases</span></div>
+    </div>
+  </div>
+
+  <div class="dp">
+    <div>
+      <div class="dp-kicker">Detailed Plan</div>
+      <div class="dp-title">Tasks &amp; Checklists by Phase</div>
+    </div>
+    <div class="dp-right">
+      <div class="dp-prog-txt"><strong id="gdone">0</strong> / <span id="gtotal">243</span> checklist items done</div>
+      <div class="dp-track"><div class="dp-bar" id="gbar"></div></div>
+    </div>
+  </div>
+
+  <div class="phase" style="--accent:#3A2B23;"><div class="ph-band"><div class="ph-name">Pre-Launch</div><div class="ph-week">Before Week 1</div></div><div class="ready"><div class="ready-dot"><span class="ready-check"></span></div><div><span class="ready-kicker">Ready at this stage&nbsp;&nbsp;</span><span class="ready-text">Legal, permits &amp; safety, finance &amp; cash, staff hired &amp; trained, suppliers &amp; contracts, inventory, equipment, POS, Instagram and all drink &amp; pastry TTKs ready before Week 1 opens.</span></div></div><div class="cards">
+      <div class="card"><div class="card-top"><div class="card-title">Sign lease / transfer agreement</div><div class="counter" data-total="5">0 / 5</div></div><div class="checklist">
+        <div class="ck" data-id="0-0-0"><div class="box"><span class="mark"></span></div><span class="lbl">Review all terms with lawyer</span></div>
+        <div class="ck" data-id="0-0-1"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm start date and handover conditions</span></div>
+        <div class="ck" data-id="0-0-2"><div class="box"><span class="mark"></span></div><span class="lbl">Fix future purchase / buyout terms in writing</span></div>
+        <div class="ck" data-id="0-0-3"><div class="box"><span class="mark"></span></div><span class="lbl">Sign and get countersigned copy</span></div>
+        <div class="ck" data-id="0-0-4"><div class="box"><span class="mark"></span></div><span class="lbl">Save to shared folder</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Permits, insurance &amp; fire safety</div><div class="counter" data-total="8">0 / 8</div></div><div class="checklist">
+        <div class="ck" data-id="0-1-0"><div class="box"><span class="mark"></span></div><span class="lbl">List all current permits held by owner</span></div>
+        <div class="ck" data-id="0-1-1"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm which transfer automatically</span></div>
+        <div class="ck" data-id="0-1-2"><div class="box"><span class="mark"></span></div><span class="lbl">Identify which need reapplication</span></div>
+        <div class="ck" data-id="0-1-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set deadlines for each reapplication</span></div>
+        <div class="ck" data-id="0-1-4"><div class="box"><span class="mark"></span></div><span class="lbl">Liability insurance</span></div>
+        <div class="ck" data-id="0-1-5"><div class="box"><span class="mark"></span></div><span class="lbl">Property insurance</span></div>
+        <div class="ck" data-id="0-1-6"><div class="box"><span class="mark"></span></div><span class="lbl">Fire safety check and equipment</span></div>
+        <div class="ck" data-id="0-1-7"><div class="box"><span class="mark"></span></div><span class="lbl">Waste collection &amp; pest control contracts</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Set up finance, banking &amp; cash</div><div class="counter" data-total="8">0 / 8</div></div><div class="checklist">
+        <div class="ck" data-id="0-2-0"><div class="box"><span class="mark"></span></div><span class="lbl">Open business bank account</span></div>
+        <div class="ck" data-id="0-2-1"><div class="box"><span class="mark"></span></div><span class="lbl">Set up card acquiring / merchant account</span></div>
+        <div class="ck" data-id="0-2-2"><div class="box"><span class="mark"></span></div><span class="lbl">Tax registration</span></div>
+        <div class="ck" data-id="0-2-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set up bookkeeping / accounting</span></div>
+        <div class="ck" data-id="0-2-4"><div class="box"><span class="mark"></span></div><span class="lbl">Set opening cash float</span></div>
+        <div class="ck" data-id="0-2-5"><div class="box"><span class="mark"></span></div><span class="lbl">Define end-of-day reconciliation</span></div>
+        <div class="ck" data-id="0-2-6"><div class="box"><span class="mark"></span></div><span class="lbl">Set cash deposit / collection schedule</span></div>
+        <div class="ck" data-id="0-2-7"><div class="box"><span class="mark"></span></div><span class="lbl">Train staff on cash procedures</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Hire staff &amp; sign employment contracts</div><div class="counter" data-total="5">0 / 5</div></div><div class="checklist">
+        <div class="ck" data-id="0-3-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define roles and headcount</span></div>
+        <div class="ck" data-id="0-3-1"><div class="box"><span class="mark"></span></div><span class="lbl">Hire / confirm existing staff</span></div>
+        <div class="ck" data-id="0-3-2"><div class="box"><span class="mark"></span></div><span class="lbl">Sign employment contracts</span></div>
+        <div class="ck" data-id="0-3-3"><div class="box"><span class="mark"></span></div><span class="lbl">Build shift schedule around peak hours</span></div>
+        <div class="ck" data-id="0-3-4"><div class="box"><span class="mark"></span></div><span class="lbl">Assign roles and responsibilities</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Full staff onboarding &amp; training</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="0-4-0"><div class="box"><span class="mark"></span></div><span class="lbl">Food safety &amp; sanitation</span></div>
+        <div class="ck" data-id="0-4-1"><div class="box"><span class="mark"></span></div><span class="lbl">POS and cash handling</span></div>
+        <div class="ck" data-id="0-4-2"><div class="box"><span class="mark"></span></div><span class="lbl">Service standards and portion control</span></div>
+        <div class="ck" data-id="0-4-3"><div class="box"><span class="mark"></span></div><span class="lbl">Opening and closing procedures</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Food safety &amp; sanitation — setup</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">Foundation applied per product in each phase.</div><div class="checklist">
+        <div class="ck" data-id="0-5-0"><div class="box"><span class="mark"></span></div><span class="lbl">Food handler certificates for all staff</span></div>
+        <div class="ck" data-id="0-5-1"><div class="box"><span class="mark"></span></div><span class="lbl">HACCP / sanitation plan</span></div>
+        <div class="ck" data-id="0-5-2"><div class="box"><span class="mark"></span></div><span class="lbl">Define shelf-life and storage standards</span></div>
+        <div class="ck" data-id="0-5-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set allergen labeling standard</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Get supplier list &amp; sign contracts under our company</div><div class="counter" data-total="7">0 / 7</div></div><div class="checklist">
+        <div class="ck" data-id="0-6-0"><div class="box"><span class="mark"></span></div><span class="lbl">Bakery ingredients supplier</span></div>
+        <div class="ck" data-id="0-6-1"><div class="box"><span class="mark"></span></div><span class="lbl">Coffee supplier</span></div>
+        <div class="ck" data-id="0-6-2"><div class="box"><span class="mark"></span></div><span class="lbl">Packaging supplier</span></div>
+        <div class="ck" data-id="0-6-3"><div class="box"><span class="mark"></span></div><span class="lbl">Any other vendors</span></div>
+        <div class="ck" data-id="0-6-4"><div class="box"><span class="mark"></span></div><span class="lbl">Save all contacts in shared doc</span></div>
+        <div class="ck" data-id="0-6-5"><div class="box"><span class="mark"></span></div><span class="lbl">Review suppliers: prices, terms, reliability</span></div>
+        <div class="ck" data-id="0-6-6"><div class="box"><span class="mark"></span></div><span class="lbl">Sign new supply contracts under our company</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Get top-selling items from current menu — in writing</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="0-7-0"><div class="box"><span class="mark"></span></div><span class="lbl">Ask owner for top 10 items by volume</span></div>
+        <div class="ck" data-id="0-7-1"><div class="box"><span class="mark"></span></div><span class="lbl">Ask for top 10 by revenue</span></div>
+        <div class="ck" data-id="0-7-2"><div class="box"><span class="mark"></span></div><span class="lbl">Note any seasonal items</span></div>
+        <div class="ck" data-id="0-7-3"><div class="box"><span class="mark"></span></div><span class="lbl">Note any items customers specifically request</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Learn peak hours and peak days</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="0-8-0"><div class="box"><span class="mark"></span></div><span class="lbl">Get daily transaction report from owner (if available)</span></div>
+        <div class="ck" data-id="0-8-1"><div class="box"><span class="mark"></span></div><span class="lbl">Note morning vs lunch vs afternoon split</span></div>
+        <div class="ck" data-id="0-8-2"><div class="box"><span class="mark"></span></div><span class="lbl">Note weekday vs weekend difference</span></div>
+        <div class="ck" data-id="0-8-3"><div class="box"><span class="mark"></span></div><span class="lbl">Use to plan staffing schedule</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Identify regular and corporate customers</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="0-9-0"><div class="box"><span class="mark"></span></div><span class="lbl">Ask owner for list of regulars</span></div>
+        <div class="ck" data-id="0-9-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check if any corporate/catering orders exist</span></div>
+        <div class="ck" data-id="0-9-2"><div class="box"><span class="mark"></span></div><span class="lbl">Note contact info for each</span></div>
+        <div class="ck" data-id="0-9-3"><div class="box"><span class="mark"></span></div><span class="lbl">Plan how to retain them during transition</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Agree on old assortment phase-out schedule — in writing</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="0-10-0"><div class="box"><span class="mark"></span></div><span class="lbl">Draft phase-out timeline by category</span></div>
+        <div class="ck" data-id="0-10-1"><div class="box"><span class="mark"></span></div><span class="lbl">Get owner signature</span></div>
+        <div class="ck" data-id="0-10-2"><div class="box"><span class="mark"></span></div><span class="lbl">Share with the team</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Relocate &amp; install espresso machine</div><div class="counter" data-total="3">0 / 3</div></div><div class="desc">Machine already owned — only needs transport and reinstall.</div><div class="checklist">
+        <div class="ck" data-id="0-11-0"><div class="box"><span class="mark"></span></div><span class="lbl">Arrange transport of existing machine</span></div>
+        <div class="ck" data-id="0-11-1"><div class="box"><span class="mark"></span></div><span class="lbl">Reinstall and connect on site</span></div>
+        <div class="ck" data-id="0-11-2"><div class="box"><span class="mark"></span></div><span class="lbl">Test run before Week 1</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Buy kitchen equipment for bread &amp; dough prep</div><div class="counter" data-total="6">0 / 6</div></div><div class="desc">Equipment for baking and dough work. A retarder/proofer and a shock freezer are required for menu tasting and developing the new fresh concept — must be ready before Week 2.</div><div class="checklist">
+        <div class="ck" data-id="0-12-0"><div class="box"><span class="mark"></span></div><span class="lbl">Buy retarder/proofer</span></div>
+        <div class="ck" data-id="0-12-1"><div class="box"><span class="mark"></span></div><span class="lbl">Buy shock freezer</span></div>
+        <div class="ck" data-id="0-12-2"><div class="box"><span class="mark"></span></div><span class="lbl">List other required equipment (oven, mixer, trays, etc.)</span></div>
+        <div class="ck" data-id="0-12-3"><div class="box"><span class="mark"></span></div><span class="lbl">Get quotes and compare suppliers</span></div>
+        <div class="ck" data-id="0-12-4"><div class="box"><span class="mark"></span></div><span class="lbl">Order and confirm delivery dates</span></div>
+        <div class="ck" data-id="0-12-5"><div class="box"><span class="mark"></span></div><span class="lbl">Install, connect and test before first bake</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add new location to existing POS</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">POS already in use — only need to attach the new outlet.</div><div class="checklist">
+        <div class="ck" data-id="0-13-0"><div class="box"><span class="mark"></span></div><span class="lbl">Check how to link the new location to current POS</span></div>
+        <div class="ck" data-id="0-13-1"><div class="box"><span class="mark"></span></div><span class="lbl">Configure categories: drinks, pastry, sandwiches, ready food</span></div>
+        <div class="ck" data-id="0-13-2"><div class="box"><span class="mark"></span></div><span class="lbl">Test transactions</span></div>
+        <div class="ck" data-id="0-13-3"><div class="box"><span class="mark"></span></div><span class="lbl">Train staff on basic operation</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Set up inventory &amp; stock management</div><div class="counter" data-total="5">0 / 5</div></div><div class="checklist">
+        <div class="ck" data-id="0-14-0"><div class="box"><span class="mark"></span></div><span class="lbl">Opening inventory count</span></div>
+        <div class="ck" data-id="0-14-1"><div class="box"><span class="mark"></span></div><span class="lbl">Set par-levels (min stock) per item</span></div>
+        <div class="ck" data-id="0-14-2"><div class="box"><span class="mark"></span></div><span class="lbl">Define ordering system &amp; reorder points</span></div>
+        <div class="ck" data-id="0-14-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set FIFO stock rotation</span></div>
+        <div class="ck" data-id="0-14-4"><div class="box"><span class="mark"></span></div><span class="lbl">Assign stock responsibility</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Develop TTK and pricing — drinks menu</div><div class="counter" data-total="7">0 / 7</div></div><div class="desc">Full drink range developed with the current owner before Week 1 opens.</div><div class="checklist">
+        <div class="ck" data-id="0-15-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define full drinks range: espresso, coffee cocktails, cold brew, lemonades</span></div>
+        <div class="ck" data-id="0-15-1"><div class="box"><span class="mark"></span></div><span class="lbl">Develop TTK for each item with exact ingredients and weights</span></div>
+        <div class="ck" data-id="0-15-2"><div class="box"><span class="mark"></span></div><span class="lbl">Calculate cost price per item</span></div>
+        <div class="ck" data-id="0-15-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set selling price (target margin)</span></div>
+        <div class="ck" data-id="0-15-4"><div class="box"><span class="mark"></span></div><span class="lbl">Approve pricing</span></div>
+        <div class="ck" data-id="0-15-5"><div class="box"><span class="mark"></span></div><span class="lbl">Document all TTKs — Astrum file, not owner’s notebook</span></div>
+        <div class="ck" data-id="0-15-6"><div class="box"><span class="mark"></span></div><span class="lbl">Shelf-life and storage check for cold drinks and lemonades</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Develop TTK and pricing — pastry menu</div><div class="counter" data-total="7">0 / 7</div></div><div class="desc">Croissant and pastry range developed with the owner. Started in Pre-Launch, finished during the next phase — must be complete before Week 2.</div><div class="checklist">
+        <div class="ck" data-id="0-16-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define pastry range</span></div>
+        <div class="ck" data-id="0-16-1"><div class="box"><span class="mark"></span></div><span class="lbl">Develop TTK for each item with exact weights</span></div>
+        <div class="ck" data-id="0-16-2"><div class="box"><span class="mark"></span></div><span class="lbl">Calculate cost price</span></div>
+        <div class="ck" data-id="0-16-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set selling price</span></div>
+        <div class="ck" data-id="0-16-4"><div class="box"><span class="mark"></span></div><span class="lbl">Approve pricing</span></div>
+        <div class="ck" data-id="0-16-5"><div class="box"><span class="mark"></span></div><span class="lbl">Document recipe cards — Astrum file</span></div>
+        <div class="ck" data-id="0-16-6"><div class="box"><span class="mark"></span></div><span class="lbl">Shelf-life test: evaluate croissants at 4h and 8h after baking</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Decision on window banner — yes / no</div></div><div class="badge-row"><span class="badge b-decision">Decision</span></div><div class="desc">Window banner announcing the rebrand — &quot;Astrum, now open&quot;. Decide before ordering anything. If yes — design, print and install must be done 7 days before Week 1 opens. If no — document the decision.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Order window banner</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="0-18-0"><div class="box"><span class="mark"></span></div><span class="lbl">Approve design</span></div>
+        <div class="ck" data-id="0-18-1"><div class="box"><span class="mark"></span></div><span class="lbl">Send to print</span></div>
+        <div class="ck" data-id="0-18-2"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm install date</span></div>
+        <div class="ck" data-id="0-18-3"><div class="box"><span class="mark"></span></div><span class="lbl">Install and photograph</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Create Instagram, prepare first 3 posts</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="0-19-0"><div class="box"><span class="mark"></span></div><span class="lbl">Create account @astrum.glendale or similar</span></div>
+        <div class="ck" data-id="0-19-1"><div class="box"><span class="mark"></span></div><span class="lbl">Write bio</span></div>
+        <div class="ck" data-id="0-19-2"><div class="box"><span class="mark"></span></div><span class="lbl">Prepare 3 posts: brand intro, behind the scenes, launch announcement</span></div>
+        <div class="ck" data-id="0-19-3"><div class="box"><span class="mark"></span></div><span class="lbl">Schedule for Week 1</span></div>
+      </div></div>
+    </div></div>
+  <div class="phase" style="--accent:#C3744A;"><div class="ph-band"><div class="ph-name">Phase 1 — Coffee &amp; Drinks</div><div class="ph-week">Week 1</div></div><div class="ready"><div class="ready-dot"><span class="ready-check"></span></div><div><span class="ready-kicker">Ready at this stage&nbsp;&nbsp;</span><span class="ready-text">Full Astrum drinks menu live on sale; old drinks removed; launch announced on Instagram.</span></div></div><div class="cards">
+      <div class="card"><div class="card-top"><div class="card-title">Food safety &amp; labeling — drinks</div><div class="counter" data-total="4">0 / 4</div></div><div class="badge-row"><span class="badge b-safety">Safety</span></div><div class="checklist">
+        <div class="ck" data-id="1-0-0"><div class="box"><span class="mark"></span></div><span class="lbl">Hygiene &amp; sanitation routine in place</span></div>
+        <div class="ck" data-id="1-0-1"><div class="box"><span class="mark"></span></div><span class="lbl">Allergen info available for drinks</span></div>
+        <div class="ck" data-id="1-0-2"><div class="box"><span class="mark"></span></div><span class="lbl">Correct storage for milk, syrups &amp; cold drinks</span></div>
+        <div class="ck" data-id="1-0-3"><div class="box"><span class="mark"></span></div><span class="lbl">Daily cleaning log</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Review inventory &amp; par-levels — drinks</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">Refine the stock system each phase.</div><div class="checklist">
+        <div class="ck" data-id="1-1-0"><div class="box"><span class="mark"></span></div><span class="lbl">Set par-levels for drinks &amp; coffee</span></div>
+        <div class="ck" data-id="1-1-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check stock vs sales</span></div>
+        <div class="ck" data-id="1-1-2"><div class="box"><span class="mark"></span></div><span class="lbl">Adjust reorder points</span></div>
+        <div class="ck" data-id="1-1-3"><div class="box"><span class="mark"></span></div><span class="lbl">Log waste &amp; shortages</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Coffee and supplies delivery</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="1-2-0"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm delivery date before Monday of Week 1</span></div>
+        <div class="ck" data-id="1-2-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check all items on delivery against order</span></div>
+        <div class="ck" data-id="1-2-2"><div class="box"><span class="mark"></span></div><span class="lbl">Store correctly</span></div>
+        <div class="ck" data-id="1-2-3"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm reorder schedule</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Lemonades and cold drinks — ingredients delivery</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="1-3-0"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm fresh ingredients delivery (fruit, syrups)</span></div>
+        <div class="ck" data-id="1-3-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check storage requirements</span></div>
+        <div class="ck" data-id="1-3-2"><div class="box"><span class="mark"></span></div><span class="lbl">Set reorder frequency based on expected volume</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Train staff on espresso machine and drinks menu</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="1-4-0"><div class="box"><span class="mark"></span></div><span class="lbl">Espresso machine operation</span></div>
+        <div class="ck" data-id="1-4-1"><div class="box"><span class="mark"></span></div><span class="lbl">Full drinks menu preparation</span></div>
+        <div class="ck" data-id="1-4-2"><div class="box"><span class="mark"></span></div><span class="lbl">Portion control per TTK</span></div>
+        <div class="ck" data-id="1-4-3"><div class="box"><span class="mark"></span></div><span class="lbl">Waste logging</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Approve final drinks pricing</div></div><div class="badge-row"><span class="badge b-decision">Decision</span></div><div class="desc">Before launch. Review cost vs price vs local market. Sign off in writing.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add full drinks menu to POS — all items</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="1-6-0"><div class="box"><span class="mark"></span></div><span class="lbl">All drinks entered with correct prices</span></div>
+        <div class="ck" data-id="1-6-1"><div class="box"><span class="mark"></span></div><span class="lbl">Categories set up correctly</span></div>
+        <div class="ck" data-id="1-6-2"><div class="box"><span class="mark"></span></div><span class="lbl">Test transaction for each category</span></div>
+        <div class="ck" data-id="1-6-3"><div class="box"><span class="mark"></span></div><span class="lbl">Print or display menu for customers</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Remove old drinks from display</div></div><div class="desc">Remove all old branded drinks and packaging. Replace with Astrum drinks only.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Instagram: announce launch, stories with process</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="1-8-0"><div class="box"><span class="mark"></span></div><span class="lbl">Post 1: launch announcement</span></div>
+        <div class="ck" data-id="1-8-1"><div class="box"><span class="mark"></span></div><span class="lbl">Stories: behind the scenes, first coffee made</span></div>
+        <div class="ck" data-id="1-8-2"><div class="box"><span class="mark"></span></div><span class="lbl">Engage with first comments</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Average drinks sold per day</div></div><div class="badge-row"><span class="badge b-metric">Metric</span></div><div class="desc">Track daily at close. Target to define before Week 1 starts. Compare day by day.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Adjust drinks prices based on first week sales</div><div class="counter" data-total="5">0 / 5</div></div><div class="badge-row"><span class="badge b-review">Review</span></div><div class="desc">End of Week 1. Look at sales volume per item. Flag anything not selling. Decide on adjustments.</div><div class="checklist">
+        <div class="ck" data-id="1-10-0"><div class="box"><span class="mark"></span></div><span class="lbl">Pull sales report from POS</span></div>
+        <div class="ck" data-id="1-10-1"><div class="box"><span class="mark"></span></div><span class="lbl">Identify slow movers</span></div>
+        <div class="ck" data-id="1-10-2"><div class="box"><span class="mark"></span></div><span class="lbl">Identify top sellers</span></div>
+        <div class="ck" data-id="1-10-3"><div class="box"><span class="mark"></span></div><span class="lbl">Adjust prices or remove items if needed</span></div>
+        <div class="ck" data-id="1-10-4"><div class="box"><span class="mark"></span></div><span class="lbl">Update POS</span></div>
+      </div></div>
+    </div></div>
+  <div class="phase" style="--accent:#3F5743;"><div class="ph-band"><div class="ph-name">Phase 2 — Croissants, Pastry &amp; Desserts</div><div class="ph-week">Week 2</div></div><div class="ready"><div class="ready-dot"><span class="ready-check"></span></div><div><span class="ready-kicker">Ready at this stage&nbsp;&nbsp;</span><span class="ready-text">Fresh croissants, pastry &amp; desserts on display; bake schedule running; old baked goods removed.</span></div></div><div class="cards">
+      <div class="card"><div class="card-top"><div class="card-title">Food safety &amp; labeling — pastry &amp; desserts</div><div class="counter" data-total="4">0 / 4</div></div><div class="badge-row"><span class="badge b-safety">Safety</span></div><div class="checklist">
+        <div class="ck" data-id="2-0-0"><div class="box"><span class="mark"></span></div><span class="lbl">Allergen labeling on all pastry &amp; desserts</span></div>
+        <div class="ck" data-id="2-0-1"><div class="box"><span class="mark"></span></div><span class="lbl">Shelf-life and storage standards applied</span></div>
+        <div class="ck" data-id="2-0-2"><div class="box"><span class="mark"></span></div><span class="lbl">Bake / finish temperatures logged</span></div>
+        <div class="ck" data-id="2-0-3"><div class="box"><span class="mark"></span></div><span class="lbl">Daily cleaning log</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Review inventory &amp; par-levels — pastry &amp; desserts</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">Refine the stock system each phase.</div><div class="checklist">
+        <div class="ck" data-id="2-1-0"><div class="box"><span class="mark"></span></div><span class="lbl">Add pastry &amp; dessert ingredients to par-levels</span></div>
+        <div class="ck" data-id="2-1-1"><div class="box"><span class="mark"></span></div><span class="lbl">Adjust on waste &amp; sell-through</span></div>
+        <div class="ck" data-id="2-1-2"><div class="box"><span class="mark"></span></div><span class="lbl">Update reorder points</span></div>
+        <div class="ck" data-id="2-1-3"><div class="box"><span class="mark"></span></div><span class="lbl">Log waste &amp; shortages</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Test par-bake, freeze &amp; finish-bake technology</div><div class="counter" data-total="5">0 / 5</div></div><div class="desc">Runs across Weeks 1–2. Validate the fresh concept: par-baking, shock freezing and finish-baking on-site in the dining area.</div><div class="checklist">
+        <div class="ck" data-id="2-2-0"><div class="box"><span class="mark"></span></div><span class="lbl">Par-bake test batches</span></div>
+        <div class="ck" data-id="2-2-1"><div class="box"><span class="mark"></span></div><span class="lbl">Shock freeze and store</span></div>
+        <div class="ck" data-id="2-2-2"><div class="box"><span class="mark"></span></div><span class="lbl">Finish-bake on-site and evaluate texture, color, taste</span></div>
+        <div class="ck" data-id="2-2-3"><div class="box"><span class="mark"></span></div><span class="lbl">Define timings and temperatures for each item</span></div>
+        <div class="ck" data-id="2-2-4"><div class="box"><span class="mark"></span></div><span class="lbl">Document the technology — Astrum file</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Develop TTK and pricing — sandwiches</div><div class="counter" data-total="7">0 / 7</div></div><div class="desc">Must be ready before Week 3.</div><div class="checklist">
+        <div class="ck" data-id="2-3-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define sandwich range</span></div>
+        <div class="ck" data-id="2-3-1"><div class="box"><span class="mark"></span></div><span class="lbl">Develop TTK with exact ingredients and weights</span></div>
+        <div class="ck" data-id="2-3-2"><div class="box"><span class="mark"></span></div><span class="lbl">Calculate cost price</span></div>
+        <div class="ck" data-id="2-3-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set selling price</span></div>
+        <div class="ck" data-id="2-3-4"><div class="box"><span class="mark"></span></div><span class="lbl">Approve</span></div>
+        <div class="ck" data-id="2-3-5"><div class="box"><span class="mark"></span></div><span class="lbl">Document — Astrum file</span></div>
+        <div class="ck" data-id="2-3-6"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm labeling format (shelf life ≤48h)</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Set up finish-bake schedule</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="2-4-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define bake times: morning, midday</span></div>
+        <div class="ck" data-id="2-4-1"><div class="box"><span class="mark"></span></div><span class="lbl">Assign responsibility to staff</span></div>
+        <div class="ck" data-id="2-4-2"><div class="box"><span class="mark"></span></div><span class="lbl">Post schedule in kitchen</span></div>
+        <div class="ck" data-id="2-4-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set waste log</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">First batch — internal quality check</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="2-5-0"><div class="box"><span class="mark"></span></div><span class="lbl">Bake first batch before display</span></div>
+        <div class="ck" data-id="2-5-1"><div class="box"><span class="mark"></span></div><span class="lbl">Evaluate: texture, color, taste</span></div>
+        <div class="ck" data-id="2-5-2"><div class="box"><span class="mark"></span></div><span class="lbl">Approve or adjust before selling to customers</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Develop &amp; launch desserts</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">Desserts already on the current bakery menu — carry over and refresh under Astrum.</div><div class="checklist">
+        <div class="ck" data-id="2-6-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define dessert range (keep best current sellers + new items)</span></div>
+        <div class="ck" data-id="2-6-1"><div class="box"><span class="mark"></span></div><span class="lbl">Develop TTK with exact weights</span></div>
+        <div class="ck" data-id="2-6-2"><div class="box"><span class="mark"></span></div><span class="lbl">Calculate cost price and set selling price</span></div>
+        <div class="ck" data-id="2-6-3"><div class="box"><span class="mark"></span></div><span class="lbl">Approve pricing</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add full pastry &amp; dessert menu to POS — all items</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="2-7-0"><div class="box"><span class="mark"></span></div><span class="lbl">All items entered with correct prices</span></div>
+        <div class="ck" data-id="2-7-1"><div class="box"><span class="mark"></span></div><span class="lbl">Test transaction</span></div>
+        <div class="ck" data-id="2-7-2"><div class="box"><span class="mark"></span></div><span class="lbl">Update printed or displayed menu</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add croissants &amp; desserts to display, remove old baked goods</div></div><div class="desc">Remove all old bakery products. Replace with Astrum pastry &amp; desserts only.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Instagram: morning video of fresh baking</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="2-9-0"><div class="box"><span class="mark"></span></div><span class="lbl">Film croissants coming out of oven</span></div>
+        <div class="ck" data-id="2-9-1"><div class="box"><span class="mark"></span></div><span class="lbl">Post as reel or story before 9am</span></div>
+        <div class="ck" data-id="2-9-2"><div class="box"><span class="mark"></span></div><span class="lbl">Caption: fresh every morning</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Waste %, sell-through rate</div></div><div class="badge-row"><span class="badge b-metric">Metric</span></div><div class="desc">Track daily. How many units baked vs sold vs wasted. Adjust bake volume by Day 3.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Adjust pastry prices based on first week sales</div><div class="counter" data-total="5">0 / 5</div></div><div class="badge-row"><span class="badge b-review">Review</span></div><div class="checklist">
+        <div class="ck" data-id="2-11-0"><div class="box"><span class="mark"></span></div><span class="lbl">Pull POS report</span></div>
+        <div class="ck" data-id="2-11-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check waste log</span></div>
+        <div class="ck" data-id="2-11-2"><div class="box"><span class="mark"></span></div><span class="lbl">Flag slow movers</span></div>
+        <div class="ck" data-id="2-11-3"><div class="box"><span class="mark"></span></div><span class="lbl">Decide adjustments</span></div>
+        <div class="ck" data-id="2-11-4"><div class="box"><span class="mark"></span></div><span class="lbl">Update POS</span></div>
+      </div></div>
+    </div></div>
+  <div class="phase" style="--accent:#C3744A;"><div class="ph-band"><div class="ph-name">Phase 3 — Sandwiches</div><div class="ph-week">Week 3</div></div><div class="ready"><div class="ready-dot"><span class="ready-check"></span></div><div><span class="ready-kicker">Ready at this stage&nbsp;&nbsp;</span><span class="ready-text">Fresh sandwiches made on-site, live on display with correct labels and shelf life.</span></div></div><div class="cards">
+      <div class="card"><div class="card-top"><div class="card-title">Food safety &amp; labeling — sandwiches</div><div class="counter" data-total="5">0 / 5</div></div><div class="badge-row"><span class="badge b-safety">Safety</span></div><div class="checklist">
+        <div class="ck" data-id="3-0-0"><div class="box"><span class="mark"></span></div><span class="lbl">Shelf-life ≤48h labeled on every item</span></div>
+        <div class="ck" data-id="3-0-1"><div class="box"><span class="mark"></span></div><span class="lbl">Cold chain &amp; storage temperature checks</span></div>
+        <div class="ck" data-id="3-0-2"><div class="box"><span class="mark"></span></div><span class="lbl">Allergen labeling</span></div>
+        <div class="ck" data-id="3-0-3"><div class="box"><span class="mark"></span></div><span class="lbl">Prevent cross-contamination</span></div>
+        <div class="ck" data-id="3-0-4"><div class="box"><span class="mark"></span></div><span class="lbl">Daily cleaning log</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Review inventory &amp; par-levels — sandwiches</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">Refine the stock system each phase.</div><div class="checklist">
+        <div class="ck" data-id="3-1-0"><div class="box"><span class="mark"></span></div><span class="lbl">Add sandwich ingredients to par-levels</span></div>
+        <div class="ck" data-id="3-1-1"><div class="box"><span class="mark"></span></div><span class="lbl">Adjust on-site prep quantities</span></div>
+        <div class="ck" data-id="3-1-2"><div class="box"><span class="mark"></span></div><span class="lbl">Update reorder points</span></div>
+        <div class="ck" data-id="3-1-3"><div class="box"><span class="mark"></span></div><span class="lbl">Log waste &amp; shortages</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Develop TTK and pricing — ready food</div><div class="counter" data-total="7">0 / 7</div></div><div class="desc">Must be ready before Week 4.</div><div class="checklist">
+        <div class="ck" data-id="3-2-0"><div class="box"><span class="mark"></span></div><span class="lbl">Define ready food range: soups, pasta, salads</span></div>
+        <div class="ck" data-id="3-2-1"><div class="box"><span class="mark"></span></div><span class="lbl">Develop TTK for each</span></div>
+        <div class="ck" data-id="3-2-2"><div class="box"><span class="mark"></span></div><span class="lbl">Calculate cost price</span></div>
+        <div class="ck" data-id="3-2-3"><div class="box"><span class="mark"></span></div><span class="lbl">Set selling price</span></div>
+        <div class="ck" data-id="3-2-4"><div class="box"><span class="mark"></span></div><span class="lbl">Approve</span></div>
+        <div class="ck" data-id="3-2-5"><div class="box"><span class="mark"></span></div><span class="lbl">Document — Astrum file</span></div>
+        <div class="ck" data-id="3-2-6"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm labeling (shelf life ≤48h)</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Set up fresh on-site sandwich prep</div><div class="counter" data-total="5">0 / 5</div></div><div class="desc">In Week 3 sandwiches are made fresh on-site.</div><div class="checklist">
+        <div class="ck" data-id="3-3-0"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm fresh ingredients delivery</span></div>
+        <div class="ck" data-id="3-3-1"><div class="box"><span class="mark"></span></div><span class="lbl">Set up prep &amp; assembly station</span></div>
+        <div class="ck" data-id="3-3-2"><div class="box"><span class="mark"></span></div><span class="lbl">Define daily prep quantities</span></div>
+        <div class="ck" data-id="3-3-3"><div class="box"><span class="mark"></span></div><span class="lbl">Check storage and shelf life (≤48h)</span></div>
+        <div class="ck" data-id="3-3-4"><div class="box"><span class="mark"></span></div><span class="lbl">Log waste</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add full sandwich menu to POS — all items</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="3-4-0"><div class="box"><span class="mark"></span></div><span class="lbl">All items with correct prices</span></div>
+        <div class="ck" data-id="3-4-1"><div class="box"><span class="mark"></span></div><span class="lbl">Test transaction</span></div>
+        <div class="ck" data-id="3-4-2"><div class="box"><span class="mark"></span></div><span class="lbl">Update menu display</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add sandwiches to display</div></div><div class="desc">Fresh on-site sandwiches on display with correct labels and shelf life. Remove any old items still remaining.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Instagram: new items of the week</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="3-6-0"><div class="box"><span class="mark"></span></div><span class="lbl">Photo or video of sandwich range</span></div>
+        <div class="ck" data-id="3-6-1"><div class="box"><span class="mark"></span></div><span class="lbl">Post + stories</span></div>
+        <div class="ck" data-id="3-6-2"><div class="box"><span class="mark"></span></div><span class="lbl">Highlight 1-2 hero items</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Average check vs Week 1</div></div><div class="badge-row"><span class="badge b-metric">Metric</span></div><div class="desc">Compare average transaction value. Did adding sandwiches increase basket size?</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Adjust sandwich prices based on first week sales</div><div class="counter" data-total="4">0 / 4</div></div><div class="badge-row"><span class="badge b-review">Review</span></div><div class="checklist">
+        <div class="ck" data-id="3-8-0"><div class="box"><span class="mark"></span></div><span class="lbl">Pull POS report</span></div>
+        <div class="ck" data-id="3-8-1"><div class="box"><span class="mark"></span></div><span class="lbl">Flag slow movers</span></div>
+        <div class="ck" data-id="3-8-2"><div class="box"><span class="mark"></span></div><span class="lbl">Decide adjustments</span></div>
+        <div class="ck" data-id="3-8-3"><div class="box"><span class="mark"></span></div><span class="lbl">Update POS</span></div>
+      </div></div>
+    </div></div>
+  <div class="phase" style="--accent:#3F5743;"><div class="ph-band"><div class="ph-name">Phase 4 — Ready Food</div><div class="ph-week">Week 4</div></div><div class="ready"><div class="ready-dot"><span class="ready-check"></span></div><div><span class="ready-kicker">Ready at this stage&nbsp;&nbsp;</span><span class="ready-text">Two sandwich options live (grab &amp; go + on-site); full Astrum menu complete &amp; locked; old branding removed; permanent signage installed.</span></div></div><div class="cards">
+      <div class="card"><div class="card-top"><div class="card-title">Food safety &amp; labeling — ready food &amp; grab &amp; go</div><div class="counter" data-total="4">0 / 4</div></div><div class="badge-row"><span class="badge b-safety">Safety</span></div><div class="checklist">
+        <div class="ck" data-id="4-0-0"><div class="box"><span class="mark"></span></div><span class="lbl">Shelf-life and use-by labeled on every item</span></div>
+        <div class="ck" data-id="4-0-1"><div class="box"><span class="mark"></span></div><span class="lbl">Temperature checks for grab &amp; go and ready food</span></div>
+        <div class="ck" data-id="4-0-2"><div class="box"><span class="mark"></span></div><span class="lbl">Allergen labeling on all items</span></div>
+        <div class="ck" data-id="4-0-3"><div class="box"><span class="mark"></span></div><span class="lbl">Daily cleaning log</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Finalize inventory &amp; stock system</div><div class="counter" data-total="4">0 / 4</div></div><div class="desc">Lock a working par-level &amp; ordering system across the full menu.</div><div class="checklist">
+        <div class="ck" data-id="4-1-0"><div class="box"><span class="mark"></span></div><span class="lbl">Consolidate par-levels for full menu</span></div>
+        <div class="ck" data-id="4-1-1"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm reorder points &amp; FIFO routine</span></div>
+        <div class="ck" data-id="4-1-2"><div class="box"><span class="mark"></span></div><span class="lbl">Assign ongoing stock responsibility</span></div>
+        <div class="ck" data-id="4-1-3"><div class="box"><span class="mark"></span></div><span class="lbl">Document the working system</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">First delivery from Astrum Kitchen — ready food</div><div class="counter" data-total="5">0 / 5</div></div><div class="checklist">
+        <div class="ck" data-id="4-2-0"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm delivery time and temperature</span></div>
+        <div class="ck" data-id="4-2-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check packaging and labeling</span></div>
+        <div class="ck" data-id="4-2-2"><div class="box"><span class="mark"></span></div><span class="lbl">Check shelf life</span></div>
+        <div class="ck" data-id="4-2-3"><div class="box"><span class="mark"></span></div><span class="lbl">Store correctly</span></div>
+        <div class="ck" data-id="4-2-4"><div class="box"><span class="mark"></span></div><span class="lbl">Log delivery</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Launch grab &amp; go packaged sandwiches</div><div class="counter" data-total="5">0 / 5</div></div><div class="desc">Two sandwich options now live — packaged grab &amp; go from Astrum Kitchen alongside fresh made on-site.</div><div class="checklist">
+        <div class="ck" data-id="4-3-0"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm grab &amp; go delivery time and temperature</span></div>
+        <div class="ck" data-id="4-3-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check packaging, labeling, shelf life</span></div>
+        <div class="ck" data-id="4-3-2"><div class="box"><span class="mark"></span></div><span class="lbl">Set up grab &amp; go display zone</span></div>
+        <div class="ck" data-id="4-3-3"><div class="box"><span class="mark"></span></div><span class="lbl">Add grab &amp; go items to POS</span></div>
+        <div class="ck" data-id="4-3-4"><div class="box"><span class="mark"></span></div><span class="lbl">Keep on-site fresh option running</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add full ready food menu to POS — all items</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="4-4-0"><div class="box"><span class="mark"></span></div><span class="lbl">All items with correct prices</span></div>
+        <div class="ck" data-id="4-4-1"><div class="box"><span class="mark"></span></div><span class="lbl">Test transaction</span></div>
+        <div class="ck" data-id="4-4-2"><div class="box"><span class="mark"></span></div><span class="lbl">Update menu display</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Add to display, lock final menu</div></div><div class="desc">This is the complete Astrum menu. No more additions until after full review.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Top sellers vs underperformers</div><div class="counter" data-total="5">0 / 5</div></div><div class="badge-row"><span class="badge b-review">Review</span></div><div class="checklist">
+        <div class="ck" data-id="4-6-0"><div class="box"><span class="mark"></span></div><span class="lbl">Pull 4-week POS report</span></div>
+        <div class="ck" data-id="4-6-1"><div class="box"><span class="mark"></span></div><span class="lbl">Rank all items by revenue</span></div>
+        <div class="ck" data-id="4-6-2"><div class="box"><span class="mark"></span></div><span class="lbl">Rank by volume</span></div>
+        <div class="ck" data-id="4-6-3"><div class="box"><span class="mark"></span></div><span class="lbl">Flag items selling less than X units per day</span></div>
+        <div class="ck" data-id="4-6-4"><div class="box"><span class="mark"></span></div><span class="lbl">Decide: keep, adjust price, or remove</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Remove old branding</div><div class="counter" data-total="3">0 / 3</div></div><div class="checklist">
+        <div class="ck" data-id="4-7-0"><div class="box"><span class="mark"></span></div><span class="lbl">Remove all signage, stickers, packaging with old brand</span></div>
+        <div class="ck" data-id="4-7-1"><div class="box"><span class="mark"></span></div><span class="lbl">Check interior and exterior</span></div>
+        <div class="ck" data-id="4-7-2"><div class="box"><span class="mark"></span></div><span class="lbl">Photograph before and after</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Install permanent Astrum signage</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="4-8-0"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm final design</span></div>
+        <div class="ck" data-id="4-8-1"><div class="box"><span class="mark"></span></div><span class="lbl">Confirm install date with contractor</span></div>
+        <div class="ck" data-id="4-8-2"><div class="box"><span class="mark"></span></div><span class="lbl">Install and photograph</span></div>
+        <div class="ck" data-id="4-8-3"><div class="box"><span class="mark"></span></div><span class="lbl">Check visibility from street</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Instagram: announce full transition complete</div><div class="counter" data-total="4">0 / 4</div></div><div class="checklist">
+        <div class="ck" data-id="4-9-0"><div class="box"><span class="mark"></span></div><span class="lbl">Post: Astrum is fully open</span></div>
+        <div class="ck" data-id="4-9-1"><div class="box"><span class="mark"></span></div><span class="lbl">Show full menu</span></div>
+        <div class="ck" data-id="4-9-2"><div class="box"><span class="mark"></span></div><span class="lbl">Show new signage</span></div>
+        <div class="ck" data-id="4-9-3"><div class="box"><span class="mark"></span></div><span class="lbl">Consider a launch offer or promotion</span></div>
+      </div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Weekly revenue vs financial model forecast</div></div><div class="badge-row"><span class="badge b-metric">Metric</span></div><div class="desc">Compare actual Week 4 revenue against the Realistic scenario from the financial model. Flag variance.</div></div>
+      <div class="card"><div class="card-top"><div class="card-title">Adjust all prices — full menu review</div><div class="counter" data-total="6">0 / 6</div></div><div class="badge-row"><span class="badge b-review">Review</span></div><div class="checklist">
+        <div class="ck" data-id="4-11-0"><div class="box"><span class="mark"></span></div><span class="lbl">Pull 4-week data for all categories</span></div>
+        <div class="ck" data-id="4-11-1"><div class="box"><span class="mark"></span></div><span class="lbl">Review full menu pricing</span></div>
+        <div class="ck" data-id="4-11-2"><div class="box"><span class="mark"></span></div><span class="lbl">Remove underperformers</span></div>
+        <div class="ck" data-id="4-11-3"><div class="box"><span class="mark"></span></div><span class="lbl">Adjust prices where needed</span></div>
+        <div class="ck" data-id="4-11-4"><div class="box"><span class="mark"></span></div><span class="lbl">Lock final menu and prices</span></div>
+        <div class="ck" data-id="4-11-5"><div class="box"><span class="mark"></span></div><span class="lbl">Update POS</span></div>
+      </div></div>
+    </div></div>
+</div>
+
+<script>
+  var KEY='astrum-plan-v1', state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ state={}; }
+  function updateCounter(card){
+    var c=card.querySelector('.counter'); if(!c) return;
+    var cks=card.querySelectorAll('.ck'), done=0;
+    for(var i=0;i<cks.length;i++) if(cks[i].classList.contains('on')) done++;
+    c.textContent=done+' / '+c.getAttribute('data-total');
+  }
+  function updateGlobal(){
+    var all=document.querySelectorAll('.ck'), done=0;
+    for(var i=0;i<all.length;i++) if(all[i].classList.contains('on')) done++;
+    document.getElementById('gdone').textContent=done;
+    document.getElementById('gbar').style.width=(all.length?Math.round(done/all.length*100):0)+'%';
+  }
+  document.addEventListener('click', function(e){
+    var ck = e.target.closest && e.target.closest('.ck'); if(!ck) return;
+    var id = ck.getAttribute('data-id');
+    state[id] = !ck.classList.contains('on');
+    ck.classList.toggle('on', state[id]);
+    try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){}
+    updateCounter(ck.closest('.card')); updateGlobal();
+  });
+  (function init(){
+    var cks=document.querySelectorAll('.ck');
+    for(var i=0;i<cks.length;i++) if(state[cks[i].getAttribute('data-id')]) cks[i].classList.add('on');
+    var cards=document.querySelectorAll('.card');
+    for(var j=0;j<cards.length;j++) updateCounter(cards[j]);
+    updateGlobal();
+  })();
+</script>
+</body>
+</html>
