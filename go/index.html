@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Переезд в США: успеть подать до конца года — разбор ситуации за 30 минут</title>
+<meta name="description" content="Вы уже решили переехать в США. Если начать сейчас, подача заявления реалистично укладывается в этот год. 30-минутный разбор вашей ситуации — бесплатно.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='8'%20fill='%230d0f12'/%3E%3Cpath%20d='M32%2010%2037%2027%2054%2032%2037%2037%2032%2054%2027%2037%2010%2032%2027%2027Z'%20fill='%23ffb300'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --panel: #14171c;
+    --line: #262b33;
+    --txt: #f4f2ec;
+    --mut: #9aa1ab;
+    --acc: #ffb300;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--txt);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, Menlo, monospace; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
+  section { padding: clamp(56px, 8vw, 104px) 0; border-top: 1px solid var(--line); }
+  h1, h2 {
+    margin: 0; text-transform: uppercase; font-weight: 800;
+    letter-spacing: -0.01em; line-height: 1.02; text-wrap: balance;
+  }
+  h1 { font-size: clamp(38px, 7.2vw, 84px); }
+  h2 { font-size: clamp(26px, 4vw, 44px); }
+  .kicker {
+    display: inline-block; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--acc); margin-bottom: 22px;
+  }
+  p.lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--txt); max-width: 640px; }
+  p.sub { color: var(--mut); max-width: 640px; }
+  .btn {
+    display: inline-block; background: var(--acc); color: #14130e; text-decoration: none;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 14px;
+    padding: 18px 30px; border: 0; cursor: pointer;
+  }
+  .btn:hover { background: #ffc73d; }
+  .micro { font-size: 13px; color: var(--mut); margin-top: 14px; }
+  .legal { font-size: 12px; color: #6d747e; line-height: 1.6; }
+
+  /* header */
+  header {
+    position: sticky; top: 0; z-index: 50; background: rgba(13,15,18,0.92);
+    backdrop-filter: blur(6px); border-bottom: 1px solid var(--line);
+  }
+  .head { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .head .tag { font-size: 12px; letter-spacing: 2.5px; color: var(--mut); text-transform: uppercase; }
+  .head a.cta { color: var(--acc); text-decoration: none; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+
+  /* hero */
+  .hero { padding: clamp(72px, 11vw, 150px) 0 clamp(64px, 9vw, 120px); border-top: 0; }
+  .hero .board {
+    display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--line);
+    padding: 10px 16px; margin-bottom: 34px; background: var(--panel);
+  }
+  .hero .board b { color: var(--acc); font-weight: 700; }
+  .hero p.lead { margin: 30px 0 38px; }
+
+  /* timeline */
+  .months { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin: 40px 0 8px; }
+  .months div {
+    background: var(--panel); border: 1px solid var(--line); padding: 12px 8px 10px;
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mut); text-align: center;
+  }
+  .months div.win { border-color: var(--acc); color: var(--acc); }
+  .scen { border: 1px solid var(--line); background: var(--panel); padding: 22px 24px; margin-top: 18px; }
+  .scen .row { display: flex; flex-wrap: wrap; gap: 8px 26px; align-items: baseline; }
+  .scen .lbl { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); min-width: 130px; }
+  .scen .val { font-weight: 700; font-size: clamp(16px, 1.6vw, 20px); }
+  .scen.ok .val { color: var(--acc); }
+  .scen.late { opacity: 0.75; }
+  .scen .note { font-size: 13px; color: var(--mut); margin: 10px 0 0; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 2px; margin-top: 44px; }
+  .step { background: var(--panel); border: 1px solid var(--line); padding: 26px 24px 30px; }
+  .step .n { font-size: 13px; color: var(--acc); letter-spacing: 2px; }
+  .step h3 { margin: 14px 0 10px; font-size: 19px; line-height: 1.25; text-transform: uppercase; letter-spacing: 0.3px; }
+  .step p { margin: 0; font-size: 15px; color: var(--mut); }
+  .step .dur { display: block; margin-top: 16px; font-size: 12px; letter-spacing: 1.5px; color: var(--txt); text-transform: uppercase; }
+
+  /* fit */
+  .fit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 2px; margin-top: 44px; }
+  .fit .col { background: var(--panel); border: 1px solid var(--line); padding: 30px 28px; }
+  .fit h3 { margin: 0 0 18px; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; }
+  .fit .yes h3 { color: var(--acc); }
+  .fit .no h3 { color: var(--mut); }
+  .fit ul { list-style: none; margin: 0; padding: 0; }
+  .fit li { padding: 12px 0 12px 28px; position: relative; border-top: 1px solid var(--line); font-size: 16px; }
+  .fit li::before { position: absolute; left: 0; font-weight: 700; }
+  .fit .yes li::before { content: "+"; color: var(--acc); }
+  .fit .no li::before { content: "\2212"; color: var(--mut); }
+  .fit .no li { color: var(--mut); }
+
+  /* private */
+  .stamp {
+    display: inline-block; border: 1.5px solid var(--acc); color: var(--acc); padding: 10px 18px;
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase; transform: rotate(-2deg);
+    margin-bottom: 30px;
+  }
+
+  /* faq */
+  details { border-top: 1px solid var(--line); }
+  details:last-of-type { border-bottom: 1px solid var(--line); }
+  summary {
+    cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 18px;
+    padding: 22px 0; font-weight: 700; font-size: clamp(16px, 1.7vw, 19px);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--acc); font-weight: 700; }
+  details[open] summary::after { content: "\2212"; }
+  details p { margin: 0 0 22px; color: var(--mut); max-width: 720px; }
+
+  /* form */
+  .formbox { background: var(--panel); border: 1px solid var(--line); padding: clamp(26px, 4vw, 48px); margin-top: 44px; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 18px; }
+  label.f { display: block; }
+  label.f span { display: block; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--mut); margin-bottom: 8px; }
+  input[type=text], input[type=email], select, textarea {
+    width: 100%; background: #0d0f12; border: 1px solid var(--line); color: var(--txt);
+    font: inherit; font-size: 16px; padding: 13px 14px; border-radius: 0; outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--acc); }
+  .consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 22px; font-size: 14px; color: var(--mut); cursor: pointer; }
+  .consent input { margin-top: 4px; accent-color: var(--acc); width: 16px; height: 16px; }
+  .err { display: none; color: #ff8f66; font-size: 14px; margin-top: 16px; }
+  .ok-msg { display: none; }
+  .ok-msg h3 { text-transform: uppercase; font-size: 24px; margin: 0 0 12px; }
+  .step2 { display: none; }
+  .fstep-label { font-size: 12px; letter-spacing: 2px; color: var(--acc); text-transform: uppercase; margin-bottom: 18px; }
+
+  /* mobile sticky cta */
+  .msticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: none;
+    background: var(--acc); color: #14130e; text-align: center; padding: 15px 10px;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 14px; text-decoration: none;
+  }
+  @media (max-width: 760px) {
+    .msticky { display: block; }
+    body { padding-bottom: 52px; }
+    .months { grid-template-columns: repeat(3, 1fr); }
+  }
+  footer { border-top: 1px solid var(--line); padding: 40px 0 56px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head">
+    <span class="tag mono">ПЕРЕЕЗД В США · БИЗНЕС-ОСНОВАНИЕ E-2</span>
+    <a class="cta" href="#form">Разбор ситуации &rarr;</a>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="board mono"><span>ДО КОНЦА ГОДА</span><b id="mleft">—</b><span>МЕС.</span><span aria-hidden="true" style="color:var(--line)">|</span><b>ОКНО ПОДАЧИ ОТКРЫТО</b></div>
+  <h1>Хватит изучать визы.<br>Пора подавать.</h1>
+  <p class="lead">Вы уже решили переехать. Если начать сейчас, подача заявления реалистично укладывается в этот год. Разберём вашу ситуацию на 30-минутном звонке — и вы уйдёте с планом и датами, а не с очередной статьёй.</p>
+  <a class="btn" href="#form">Получить разбор моей ситуации</a>
+  <p class="micro">Бесплатно · 30 минут · ни к чему не обязывает</p>
+  <p class="legal" style="max-width:560px; margin-top:26px">Решение по визе принимают органы США. Иммиграционную часть ведёт независимый лицензированный адвокат. Сроки — ориентир процесса, не гарантия.</p>
+</div>
+
+<section id="window">
+  <div class="wrap">
+    <span class="kicker mono">01 · Окно времени</span>
+    <h2>Обратный отсчёт — не маркетинг.<br>Это график процесса.</h2>
+    <p class="sub" style="margin-top:26px">Подготовка бизнес-основания и пакета документов занимает ориентировочно 3–5 месяцев. Дальше — простая арифметика: чем позже старт, тем позже подача. Решение всегда за консульством США — но график зависит только от вас.</p>
+    <div class="months mono" id="months"></div>
+    <div class="scen ok">
+      <div class="row"><span class="lbl mono">Старт сейчас</span><span class="val mono" id="scen1">&rarr; подача: ноябрь–декабрь</span></div>
+      <p class="note">Пакет уходит в этом году. Дальше — собеседование по графику консульства.</p>
+    </div>
+    <div class="scen late">
+      <div class="row"><span class="lbl mono">Старт через 3 мес.</span><span class="val mono" id="scen2">&rarr; подача: следующий год</span></div>
+      <p class="note">То же самое, но всё сдвигается. Ничего не теряется — кроме времени.</p>
+    </div>
+    <p style="margin-top:34px"><a class="btn" href="#form">Узнать мой график</a></p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <span class="kicker mono">02 · Как это работает</span>
+    <h2>Четыре шага.<br>Первый занимает 30 минут.</h2>
+    <div class="steps">
+      <div class="step"><span class="n mono">ШАГ 1</span><h3>Звонок-разбор</h3><p>Гражданство, бюджет, семья, история отказов. На выходе — честный вердикт: есть для вас маршрут или нет.</p><span class="dur mono">30 минут · бесплатно</span></div>
+      <div class="step"><span class="n mono">ШАГ 2</span><h3>Маршрут и график</h3><p>Конкретный путь, документы, состав бюджета и ориентир дат — под вашу ситуацию, не «в среднем».</p><span class="dur mono">Вы решаете, идти ли дальше</span></div>
+      <div class="step"><span class="n mono">ШАГ 3</span><h3>Подготовка основания</h3><p>Бизнес-часть готовим мы. Иммиграционную часть ведёт независимый лицензированный адвокат.</p><span class="dur mono">Ориентир: 3–5 месяцев</span></div>
+      <div class="step"><span class="n mono">ШАГ 4</span><h3>Подача и собеседование</h3><p>Пакет уходит. Дальше — график консульства. Мы сопровождаем процесс до конца.</p><span class="dur mono">Решение — за органами США</span></div>
+    </div>
+    <p style="margin-top:34px"><a class="btn" href="#form">Сделать шаг 1 — 30 минут</a></p>
+  </div>
+</section>
+
+<section id="fit">
+  <div class="wrap">
+    <span class="kicker mono">03 · Отбор</span>
+    <h2>Мы не для всех.<br>И это принципиально.</h2>
+    <div class="fit">
+      <div class="col yes">
+        <h3 class="mono">Это для вас, если</h3>
+        <ul>
+          <li>Решение о переезде принято — нужен исполнимый план</li>
+          <li>Бюджет проекта — от $200 000</li>
+          <li>Готовы стартовать в ближайшие 1–2 месяца</li>
+          <li>Готовы реально владеть и управлять бизнесом в США</li>
+        </ul>
+      </div>
+      <div class="col no">
+        <h3 class="mono">Это не для вас, если</h3>
+        <ul>
+          <li>Нужна «гарантия визы» — таких гарантий не существует. Кто обещает — лжёт</li>
+          <li>«Посмотрю через годик»</li>
+          <li>Нужна виза без реального переезда и бизнеса</li>
+          <li>Ищете обходные схемы</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:34px"><a class="btn" href="#form">Проверить, подхожу ли я</a></p>
+  </div>
+</section>
+
+<section id="base">
+  <div class="wrap">
+    <span class="kicker mono">04 · Основание</span>
+    <h2>Мы не начинаем с нуля.<br>И вы не будете.</h2>
+    <p class="sub" style="margin-top:26px">Под бизнес-основание категории E-2 у нас развёрнута работающая инфраструктура в США: юридическая структура, операционная база, партнёры — и независимый лицензированный адвокат на иммиграционной части.</p>
+    <div class="stamp mono">Закрытый проект · Детали после звонка и NDA</div>
+    <p class="sub">Мы сознательно не публикуем финансы, команду и локации. После ознакомительного звонка и взаимного NDA вы получаете полный пакет: документы, отчёты и знакомство с каждым участником проекта. На звонке поймёте, почему так.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="kicker mono">05 · Прямые ответы</span>
+    <h2>Спросите жёстко.<br>Ответим прямо.</h2>
+    <div style="margin-top:40px">
+      <details><summary>Вы гарантируете визу?</summary><p>Нет. Никто не вправе. Решение принимает консульство США после рассмотрения заявления. Мы гарантируем только качество процесса и честный вердикт на старте.</p></details>
+      <details><summary>Почему я должен верить, что успеем в этом году?</summary><p>Мы обещаем не результат, а график: при старте сейчас подготовка пакета укладывается так, что подача происходит в этом году. На звонке покажем расчёт по датам — проверите сами.</p></details>
+      <details><summary>У меня был отказ по визе США</summary><p>Отказ по другой категории не закрывает путь автоматически. Вашу историю оценит лицензированный адвокат — до того, как вы вложите хоть доллар.</p></details>
+      <details><summary>Сколько это стоит?</summary><p>Звонок — бесплатно. Бюджеты обсуждаем после разбора: называть цифры до понимания вашей ситуации — непрофессионально. Ориентир входа в проект — от $200 000.</p></details>
+      <details><summary>Что если не успеем до конца года?</summary><p>Тогда подача сдвинется на следующий год — и мы скажем вам об этом прямо на старте, а не в процессе. Никаких сюрпризов на середине пути.</p></details>
+      <details><summary>Почему на сайте так мало информации?</summary><p>Проект закрытый — осознанно. Публичный этап — этот. Всё остальное: документы, команда, локации — после звонка и NDA.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="form">
+  <div class="wrap">
+    <span class="kicker mono">06 · Заявка</span>
+    <h2>30 минут — и у вас план.<br>Или честное «не подходит».</h2>
+    <div class="formbox">
+      <div id="fs1">
+        <div class="fstep-label mono">Шаг 1 из 2 — контакт</div>
+        <div class="grid2">
+          <label class="f"><span>Имя</span><input type="text" id="f-name" placeholder="Как к вам обращаться"></label>
+          <label class="f"><span>Телефон / WhatsApp / Telegram</span><input type="text" id="f-contact" placeholder="+1 ··· или @···"></label>
+          <label class="f"><span>Email (необязательно)</span><input type="email" id="f-email" placeholder="name@example.com"></label>
+        </div>
+        <p class="err" id="err1">Укажите имя и хотя бы один контакт.</p>
+        <p style="margin-top:26px"><button class="btn" id="next">Дальше — 30 секунд &rarr;</button></p>
+        <p class="micro">Без документов и предоплат на этом этапе</p>
+      </div>
+      <div id="fs2" class="step2">
+        <div class="fstep-label mono">Шаг 2 из 2 — коротко о ситуации</div>
+        <div class="grid2">
+          <label class="f"><span>Гражданство (паспорт)</span>
+            <select id="f-passport"><option value="">— выбрать —</option><option>Казахстан</option><option>Армения</option><option>Россия</option><option>Украина</option><option>Беларусь</option><option>Узбекистан</option><option>Грузия</option><option>Кыргызстан</option><option>Другая страна</option></select></label>
+          <label class="f"><span>Бюджет проекта переезда</span>
+            <select id="f-budget"><option value="">— выбрать —</option><option>до $100 000</option><option>$100–200 тыс.</option><option>$200–300 тыс.</option><option>$300 тыс.+</option><option>Не готов(а) назвать</option></select></label>
+          <label class="f"><span>Когда готовы стартовать</span>
+            <select id="f-start"><option value="">— выбрать —</option><option>В этом месяце</option><option>В течение 1–2 месяцев</option><option>В этом году</option><option>Пока изучаю</option></select></label>
+          <label class="f"><span>Кто переезжает</span>
+            <select id="f-family"><option value="">— выбрать —</option><option>Я один / одна</option><option>С супругом(-ой)</option><option>С супругом(-ой) и детьми</option></select></label>
+          <label class="f"><span>Были ли отказы в визах США</span>
+            <select id="f-refusal"><option value="">— выбрать —</option><option>Нет</option><option>Да, туристическая</option><option>Да, другая</option></select></label>
+          <label class="f"><span>Коротко о ситуации (необязательно)</span><input type="text" id="f-note" placeholder="Например: семья из 4 человек, хотим к сентябрю"></label>
+        </div>
+        <label class="consent"><input type="checkbox" id="f-consent"><span>Соглашаюсь на обработку персональных данных и получение ответа по указанным контактам.</span></label>
+        <p class="err" id="err2">Ответьте на вопросы анкеты и отметьте согласие.</p>
+        <p style="margin-top:26px"><button class="btn" id="send">Записаться на разбор</button></p>
+        <p class="micro">Ответим в течение рабочего дня. Звонок бесплатный и ни к чему не обязывает.</p>
+      </div>
+      <div class="ok-msg" id="okmsg">
+        <h3>Заявка принята</h3>
+        <p class="sub">Свяжемся в течение рабочего дня и предложим время разбора. Если по анкете маршрута нет — скажем прямо, без «созвонов ради созвона».</p>
+      </div>
+    </div>
+    <p class="legal" style="margin-top:22px">Звонок не является юридической или иммиграционной консультацией. Иммиграционные услуги оказывает независимый лицензированный адвокат.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap legal">
+    Информация на сайте носит общий информационный характер и не является юридической, иммиграционной, налоговой, финансовой или инвестиционной консультацией, а также публичной офертой. Указанные сроки являются ориентиром штатного графика процесса и могут меняться; окончательные условия фиксируются только в подписанном договоре. Участие в проекте не гарантирует получение визы, въезд в США, доходность или возврат вложенных средств. Решение по визе принимается исключительно компетентными органами США после индивидуального рассмотрения заявления. Иммиграционные услуги оказываются независимым лицензированным адвокатом. Любая предпринимательская деятельность связана с коммерческими рисками.
+  </div>
+</footer>
+
+<a class="msticky" href="#form">Разбор ситуации &rarr;</a>
+
+<script>
+(function () {
+  var M = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+  var now = new Date(), m = now.getMonth();
+  var left = 12 - (m + 1);
+  document.getElementById('mleft').textContent = '0' + Math.max(left, 0);
+
+  var box = document.getElementById('months');
+  for (var i = m; i <= 11 && i < m + 6; i++) {
+    var d = document.createElement('div');
+    d.textContent = M[i].slice(0, 3).toUpperCase();
+    if (i >= m + 3) d.className = 'win';
+    box.appendChild(d);
+  }
+  var s1a = Math.min(m + 3, 11), s1b = Math.min(m + 4, 11);
+  document.getElementById('scen1').textContent = (m + 4 <= 11)
+    ? '→ подача: ' + M[s1a] + '–' + M[s1b]
+    : '→ подача: конец года';
+  if (m + 6 > 11) document.getElementById('scen2').textContent = '→ подача: следующий год';
+
+  function val(id) { var el = document.getElementById(id); return (el.value || '').trim(); }
+  document.getElementById('next').addEventListener('click', function () {
+    if (!val('f-name') || (!val('f-contact') && !val('f-email'))) {
+      document.getElementById('err1').style.display = 'block'; return;
+    }
+    document.getElementById('err1').style.display = 'none';
+    document.getElementById('fs1').style.display = 'none';
+    document.getElementById('fs2').style.display = 'block';
+  });
+  document.getElementById('send').addEventListener('click', function () {
+    var need = ['f-passport','f-budget','f-start','f-family','f-refusal'];
+    var full = need.every(function (id) { return val(id); });
+    if (!full || !document.getElementById('f-consent').checked) {
+      document.getElementById('err2').style.display = 'block'; return;
+    }
+    document.getElementById('err2').style.display = 'none';
+    try {
+      fetch('https://formsubmit.co/ajax/astrum.california@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Заявка с лендинга E-2 — ASTRUM (GO)',
+          _template: 'table', _captcha: 'false',
+          'Имя': val('f-name'), 'Контакт': val('f-contact'), 'Email': val('f-email'),
+          'Паспорт': val('f-passport'), 'Бюджет': val('f-budget'), 'Старт': val('f-start'),
+          'Состав семьи': val('f-family'), 'Отказы': val('f-refusal'), 'Комментарий': val('f-note'),
+          'Страница': location.href
+        })
+      }).catch(function () {});
+    } catch (e) {}
+    document.getElementById('fs2').style.display = 'none';
+    document.getElementById('okmsg').style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>
