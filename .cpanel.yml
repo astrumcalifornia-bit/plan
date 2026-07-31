@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/xkryolap/usbusinesslaunch.com
+    - export DEPLOYPATH=/home/xkryolap/public_html
     - /bin/mkdir -p $DEPLOYPATH/b $DEPLOYPATH/en/b
     - /bin/cp landing/index.html $DEPLOYPATH/index.html
     - /bin/cp landing/b/index.html $DEPLOYPATH/b/index.html
