@@ -1,9 +1,4 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/xkryolap/public_html
-    - /bin/mkdir -p $DEPLOYPATH/b $DEPLOYPATH/en/b
-    - /bin/cp landing/index.html $DEPLOYPATH/index.html
-    - /bin/cp landing/b/index.html $DEPLOYPATH/b/index.html
-    - /bin/cp landing/en/index.html $DEPLOYPATH/en/index.html
-    - /bin/cp landing/en/b/index.html $DEPLOYPATH/en/b/index.html
+    - for D in /home/xkryolap/public_html /home/xkryolap/usbusinesslaunch.com; do /bin/mkdir -p $D/b $D/en/b; /bin/cp landing/index.html $D/index.html; /bin/cp landing/b/index.html $D/b/index.html; /bin/cp landing/en/index.html $D/en/index.html; /bin/cp landing/en/b/index.html $D/en/b/index.html; done
