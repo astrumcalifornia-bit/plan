@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - for D in /home/xkryolap/public_html /home/xkryolap/usbusinesslaunch.com; do /bin/mkdir -p $D/b $D/en/b $D/go; /bin/cp landing/index.html $D/index.html; /bin/cp landing/b/index.html $D/b/index.html; /bin/cp landing/en/index.html $D/en/index.html; /bin/cp landing/en/b/index.html $D/en/b/index.html; /bin/cp go/index.html $D/go/index.html; /bin/cp htaccess_site $D/.htaccess; done
+    - for D in /home/xkryolap/public_html /home/xkryolap/usbusinesslaunch.com; do /bin/mkdir -p $D/b $D/en/b $D/go $D/privacy; /bin/cp landing/index.html $D/index.html; /bin/cp landing/b/index.html $D/b/index.html; /bin/cp landing/en/index.html $D/en/index.html; /bin/cp landing/en/b/index.html $D/en/b/index.html; /bin/cp go/index.html $D/go/index.html; /bin/cp privacy/index.html $D/privacy/index.html; /bin/cp htaccess_site $D/.htaccess; done
