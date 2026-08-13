@@ -10,6 +10,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NL25P36D');</script>
 <!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KR5XN9QK2C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KR5XN9QK2C');
+</script>
+<!-- End Google tag -->
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -372,6 +381,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     document.getElementById('err2').style.display = 'none';
     window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'lead_form_submit' }); if (window.ym) { try { ym(111502652, 'reachGoal', 'lead_form_submit'); } catch (e) {} }
+    if (window.gtag) { try { gtag('event', 'lead_form_submit', { landing_variant: 'GO' }); } catch (e) {} }
     try {
       fetch('https://formsubmit.co/ajax/astrum.california@gmail.com', {
         method: 'POST',
