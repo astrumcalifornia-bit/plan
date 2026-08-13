@@ -489,14 +489,60 @@ document.addEventListener('DOMContentLoaded', async function() {
   var ENDPOINT = 'https://formsubmit.co/ajax/astrum.california@gmail.com';
   var BTN_TEXT = 'Запросить презентацию проекта';
   var COUNTER = 111502652;
+  var KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','yclid'];
+  var STORE = 'astrum_first_touch';
+  var TTL = 90 * 24 * 60 * 60 * 1000;
   var fired = {};
 
+  /* ── источник визита: first-touch, хранится 90 дней ───────────────── */
+  function readStore() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!o || !o.ts || (Date.now() - o.ts) > TTL) return null;
+      return o;
+    } catch (e) { return null; }
+  }
+  function saveStore(o) {
+    try { localStorage.setItem(STORE, JSON.stringify(o)); } catch (e) {}
+    try {
+      document.cookie = STORE + '=' + encodeURIComponent(JSON.stringify(o)) +
+        ';path=/;max-age=' + (TTL / 1000) + ';SameSite=Lax';
+    } catch (e) {}
+  }
+  function readCookie() {
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + STORE + '=([^;]*)'));
+      if (!m) return null;
+      var o = JSON.parse(decodeURIComponent(m[1]));
+      return (o && o.ts && (Date.now() - o.ts) <= TTL) ? o : null;
+    } catch (e) { return null; }
+  }
+  var firstTouch = (function () {
+    var q = new URLSearchParams(location.search), fresh = {}, has = false;
+    KEYS.forEach(function (k) { var v = q.get(k); if (v) { fresh[k] = v; has = true; } });
+    var saved = readStore() || readCookie();
+    if (saved && !has) return saved;              /* повторный заход без меток — не перезатираем */
+    if (!has) return saved || { ts: Date.now() };
+    fresh.ts = Date.now();
+    fresh.first_landing = location.pathname;
+    fresh.first_referrer = document.referrer || '';
+    if (saved) { saveStore(saved); return saved; } /* первый источник важнее последнего */
+    saveStore(fresh);
+    return fresh;
+  })();
+
+  var VARIANT = /(^|\/)b\/?$/.test(location.pathname.replace(/index\.html$/, '')) ? 'B' : 'A';
+
+  /* ── цели: Метрика + dataLayer (GTM) + gtag (GA4, когда подключат) ── */
   function goal(name) {
     if (fired[name]) return;
     fired[name] = 1;
     if (window.ym) { try { ym(COUNTER, 'reachGoal', name); } catch (e) {} }
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: name });
+    window.dataLayer.push({ event: name, landing_variant: VARIANT });
+    if (window.gtag) { try { gtag('event', name, { landing_variant: VARIANT }); } catch (e) {} }
   }
 
   function val(sel) {
@@ -504,15 +550,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     return el ? (el.value || '').trim() : '';
   }
 
-  function utms() {
-    var out = {}, q = new URLSearchParams(location.search);
-    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','yclid','gclid'].forEach(function (k) {
-      var v = q.get(k);
-      if (v) out[k] = v;
-    });
-    return out;
-  }
-
+  /* ── отправка заявки ───────────────────────────────────────────────── */
   document.addEventListener('click', function (e) {
     var link = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (link && /^(tel:|mailto:)|wa\.me|t\.me/.test(link.getAttribute('href') || '')) goal('contact_click');
@@ -542,10 +580,11 @@ document.addEventListener('DOMContentLoaded', async function() {
       'Email': email,
       'Мессенджер': messenger,
       'О себе': details,
-      'Страница': location.href
+      'Страница': location.href,
+      landing_variant: VARIANT
     };
-    var u = utms();
-    Object.keys(u).forEach(function (k) { payload[k] = u[k]; });
+    KEYS.forEach(function (k) { if (firstTouch[k]) payload[k] = firstTouch[k]; });
+    if (firstTouch.first_referrer) payload.first_referrer = firstTouch.first_referrer;
 
     try {
       fetch(ENDPOINT, {
@@ -556,20 +595,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     } catch (err) {}
   }, true);
 
-  document.addEventListener('input', function (e) {
-    var el = e.target;
-    if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) && el.type !== 'checkbox') goal('form_start');
-  }, true);
-  document.addEventListener('change', function (e) {
-    if (e.target && e.target.tagName === 'SELECT') goal('form_start');
-  }, true);
+  /* ── микроконверсии ────────────────────────────────────────────────── */
+  function formField(el) {
+    return el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) && el.type !== 'checkbox';
+  }
+  document.addEventListener('focusin', function (e) { if (formField(e.target)) goal('form_start'); }, true);
+  document.addEventListener('input', function (e) { if (formField(e.target)) goal('form_start'); }, true);
+  document.addEventListener('change', function (e) { if (e.target && e.target.tagName === 'SELECT') goal('form_start'); }, true);
 
   window.addEventListener('scroll', function () {
     var h = document.documentElement.scrollHeight - window.innerHeight;
     if (h > 0 && (window.scrollY / h) >= 0.75) goal('scroll_75');
   }, { passive: true });
 
-  setTimeout(function () { goal('time_60s'); }, 60000);
+  var active = 0;
+  setInterval(function () {
+    if (document.visibilityState === 'visible') {
+      active += 1;
+      if (active >= 60) goal('time_60s');
+    }
+  }, 1000);
 })();
 </script>
 <script>
