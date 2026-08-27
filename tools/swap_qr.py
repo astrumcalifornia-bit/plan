@@ -6,6 +6,9 @@
 сглаживанием по светлым пикселям (старые модули в расчёт не берутся),
 а новый код накладывается по альфе.
 
+Переписываются только пиксели старых модулей и новых: рамка, обводка или
+любой другой элемент, попавший в зону работы, остаётся нетронутым.
+
 Пример:
     python3 tools/swap_qr.py page.png new-qr.svg --box 780,1210,969,1399 -o page-new.png
 """
@@ -63,13 +66,21 @@ def main():
     den = cv2.GaussianBlur(np.repeat(light, 3, axis=2), (0, 0), args.sigma)
     backing = num / np.maximum(den, 1e-3)
 
+    # маска старых модулей: только их и стираем
+    box = reg[y0 - ry0:y1 - ry0 + 1, x0 - rx0:x1 - rx0 + 1]
+    dark = (box.max(axis=2) < 120) & ((box.max(axis=2) - box.min(axis=2)) < 45)
+    old = np.zeros(reg.shape[:2], np.uint8)
+    old[y0 - ry0:y1 - ry0 + 1, x0 - rx0:x1 - rx0 + 1] = dark
+    old = cv2.dilate(old, np.ones((5, 5), np.uint8)).astype(np.float32)[:, :, None]
+    reg_new = reg * (1 - old) + backing * old
+
     qr, canvas = render_qr(args.qr, x1 - x0 + 1, args.margin)
     alpha = np.clip(1.0 - qr / 255.0, 0, 1)
     off = int(round(args.margin * canvas))
     full = np.zeros(reg.shape[:2], np.float32)
     full[y0 - off - ry0:y0 - off - ry0 + canvas, x0 - off - rx0:x0 - off - rx0 + canvas] = alpha
     a = full[:, :, None]
-    page[ry0:ry1, rx0:rx1] = backing * (1 - a) + ink * a
+    page[ry0:ry1, rx0:rx1] = reg_new * (1 - a) + ink * a
 
     Image.fromarray(np.clip(page, 0, 255).astype(np.uint8)).save(args.output)
     ok, infos, _, _ = cv2.QRCodeDetector().detectAndDecodeMulti(cv2.imread(args.output))

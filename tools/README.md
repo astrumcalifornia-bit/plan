@@ -126,3 +126,22 @@ python3 tools/swap_text.py cover.png "tatiksvareniki.com" \
 curl -s "https://fonts.googleapis.com/css2?family=Anton" -H "User-Agent: Mozilla/5.0" \
   | grep -o 'https://[^)]*\.ttf' | head -1 | xargs curl -s -o Anton.ttf
 ```
+
+---
+
+# nup.py — копии изделия сеткой на печатном листе
+
+Изделие одностороннее (одна страница) или двустороннее (две); все копии на листе
+одинаковые, после печати лист режется по сетке.
+
+```bash
+python3 tools/nup.py ru.png en.png -o cards-a4.pdf --sheet a4 --grid 2x2 --flip long
+```
+
+Здесь содержимое вертикальное на вертикальном листе, поэтому переворот
+по длинной стороне даёт правильную ориентацию оборота сам собой, а по короткой —
+требует поворота на 180°, что инструмент и делает. Это обратно тому, как ведёт
+себя `a5_to_a4.py`, где макет лежит горизонтально.
+
+Ключи: `--sheet` (a4, a3, letter или ШxВ в мм), `--landscape`, `--grid КОЛxСТР`,
+`--flip`, `--fit`, `--dpi`, `--cut-marks` (метки реза по краям листа).
