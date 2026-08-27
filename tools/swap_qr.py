@@ -45,19 +45,26 @@ def main():
     ap.add_argument("--box", required=True, metavar="X0,Y0,X1,Y1",
                     help="габарит модулей старого кода в пикселях страницы")
     ap.add_argument("-o", "--output", required=True)
-    ap.add_argument("--pad", type=int, default=16, help="запас вокруг, где восстанавливается подложка")
+    ap.add_argument("--pad", default="16", metavar="N|NX,NY",
+                    help="запас вокруг зоны работы; можно задать по горизонтали и вертикали раздельно, "
+                         "если старый код выходил за рамку размещения только с одной стороны")
     ap.add_argument("--sigma", type=float, default=14, help="радиус сглаживания подложки")
     ap.add_argument("--ink", default="26,26,26", help="цвет модулей, R,G,B")
     ap.add_argument("--margin", type=float, default=SVG_MARGIN,
                     help="доля поля вокруг модулей в файле кода")
+    ap.add_argument("--dark", type=int, default=170,
+                    help="порог яркости, ниже которого пиксель считается модулем старого кода")
     args = ap.parse_args()
 
     x0, y0, x1, y1 = (int(v) for v in args.box.split(","))
     ink = np.array([float(v) for v in args.ink.split(",")])
 
+    pads = [int(v) for v in args.pad.split(",")]
+    pad_x, pad_y = (pads * 2)[:2]
+
     page = np.asarray(Image.open(args.page).convert("RGB")).astype(np.float32)
-    rx0, ry0 = x0 - args.pad, y0 - args.pad
-    rx1, ry1 = x1 + args.pad + 1, y1 + args.pad + 1
+    rx0, ry0 = x0 - pad_x, y0 - pad_y
+    rx1, ry1 = x1 + pad_x + 1, y1 + pad_y + 1
     reg = page[ry0:ry1, rx0:rx1]
 
     # подложка: среднее по светлым пикселям, тёмные модули не участвуют
@@ -66,12 +73,12 @@ def main():
     den = cv2.GaussianBlur(np.repeat(light, 3, axis=2), (0, 0), args.sigma)
     backing = num / np.maximum(den, 1e-3)
 
-    # маска старых модулей: только их и стираем
-    box = reg[y0 - ry0:y1 - ry0 + 1, x0 - rx0:x1 - rx0 + 1]
-    dark = (box.max(axis=2) < 120) & ((box.max(axis=2) - box.min(axis=2)) < 45)
-    old = np.zeros(reg.shape[:2], np.uint8)
-    old[y0 - ry0:y1 - ry0 + 1, x0 - rx0:x1 - rx0 + 1] = dark
-    old = cv2.dilate(old, np.ones((5, 5), np.uint8)).astype(np.float32)[:, :, None]
+    # маска старых модулей: нейтрально-тёмное по всей зоне работы. Старый код
+    # мог быть крупнее нового, поэтому ищем не только внутри рамки размещения;
+    # цветные элементы (рамка, надпись) по цветности отсеиваются и уцелеют.
+    span = reg.max(axis=2) - reg.min(axis=2)
+    dark = (reg.max(axis=2) < args.dark) & (span < 45)
+    old = cv2.dilate(dark.astype(np.uint8), np.ones((5, 5), np.uint8)).astype(np.float32)[:, :, None]
     reg_new = reg * (1 - old) + backing * old
 
     qr, canvas = render_qr(args.qr, x1 - x0 + 1, args.margin)
