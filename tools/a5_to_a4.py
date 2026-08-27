@@ -11,6 +11,10 @@
            Порядок страниц переставляется (8|1, 2|7, 6|3, 4|5 для 8 страниц).
            Это то, что нужно, если макет сгибается, а не режется.
 
+  duplicate  Две одинаковые копии на листе: обе половины несут одну и ту же
+           страницу. Для двустороннего изделия из двух страниц (лицо и оборот)
+           получается один лист, который режется пополам на два готовых экземпляра.
+
   simple   Разрезать и сложить стопкой: левая половина листов -- первая
            половина страниц, правая -- вторая. После печати пачка режется
            пополам по сгибу, правая стопка кладётся под левую, порядок 1..N.
@@ -76,6 +80,12 @@ def booklet_order(n_pages):
     return sheets
 
 
+def duplicate_order(n_pages):
+    """Две одинаковые копии изделия на листе; 1 или 2 страницы на входе."""
+    back = 2 if n_pages > 1 else 0
+    return [((1, 1), (back, back))]
+
+
 def stack_order(n_pages):
     """Раскладка «разрезать и сложить стопкой»."""
     half = n_pages // 2
@@ -136,8 +146,9 @@ def main():
     )
     parser.add_argument("inputs", nargs="+", help="папка со страницами или список файлов по порядку")
     parser.add_argument("-o", "--output", default="a4-print.pdf", help="итоговый PDF")
-    parser.add_argument("--mode", choices=["booklet", "simple"], default="booklet",
-                        help="booklet -- брошюра на сгиб (по умолчанию), simple -- разрезать и сложить стопкой")
+    parser.add_argument("--mode", choices=["booklet", "simple", "duplicate"], default="booklet",
+                        help="booklet -- брошюра на сгиб (по умолчанию), simple -- разрезать и сложить "
+                             "стопкой, duplicate -- две одинаковые копии на листе")
     parser.add_argument("--flip", choices=["short", "long"], default="short",
                         help="сторона переворота при двусторонней печати; для горизонтального макета "
                              "обычно 'по короткой стороне' (short)")
@@ -158,8 +169,13 @@ def main():
     files = collect_pages(args.inputs)
     pages = [Image.open(f) for f in files]
     n = len(pages)
-    padded = n + (-n % 4)
-    order = booklet_order(padded) if args.mode == "booklet" else stack_order(padded)
+    if args.mode == "duplicate":
+        if n > 2:
+            sys.exit("Режим duplicate рассчитан на одну или две страницы (лицо и оборот).")
+        padded, order = n, duplicate_order(n)
+    else:
+        padded = n + (-n % 4)
+        order = booklet_order(padded) if args.mode == "booklet" else stack_order(padded)
 
     px_mm = args.dpi * MM
     geom = {

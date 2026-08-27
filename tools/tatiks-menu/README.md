@@ -29,19 +29,41 @@
 
 Итог: `fixed/p1-cover.png`, `p2-inside-left.png`, `p3-inside-right.png`, `p4-back.png`.
 
-## replace_qr.py
+## Замена QR
 
-Меняет QR на обложке, сохраняя белую подложку с мягким градиентом:
-восстанавливает подложку сглаживанием по светлым пикселям (старые модули игнорируются),
-затем накладывает новый QR по альфе. Новый код — `https://lnk.at/tatikvareniki`,
-вписан ровно в габарит старого (188×188 px), читаемость проверена уже с готового листа.
+Отдельным шагом, общим инструментом `../swap_qr.py`. Новый код —
+`https://lnk.at/tatikvareniki`, вписан ровно в габарит старого (188×188 px),
+читаемость проверена уже с собранного листа, а не с исходника.
+
+```bash
+python3 ../swap_qr.py fixed/p1-cover.png qr.svg --box 428,1225,615,1412 -o fixed/p1-cover.png
+```
 
 ## Сборка
 
 ```bash
 python3 fix_borders.py
-python3 replace_qr.py
+python3 ../swap_qr.py fixed/p1-cover.png qr.svg --box 428,1225,615,1412 -o fixed/p1-cover.png
 python3 ../a5_to_a4.py fixed -o tatiks-a4.pdf --mode booklet --flip long --fit cover --dpi 180
 ```
 
 Исходники ожидаются в `real/1.png` … `real/4.png`.
+
+
+---
+
+## Флаер A5 (отдельное изделие)
+
+Двусторонний флаер, две страницы 1053×1494 px: сторона 1 — «Homemade family
+recipes», сторона 2 — «New Combo Lunch» с QR. Сгиба нет, сводить бордюры не нужно.
+
+```bash
+python3 ../swap_qr.py side-2.png qr.svg --box 780,1210,969,1399 -o fixed-side-2.png
+python3 ../images_to_pdf.py side-1.png fixed-side-2.png -o flyer-A5.pdf --size a5 --dpi 181
+python3 ../a5_to_a4.py side-1.png fixed-side-2.png -o flyer-A4-2up.pdf \
+        --mode duplicate --flip long --fit cover --dpi 180
+```
+
+Старый QR на флаере был нерабочим: сетка модулей неровная, декодер возвращает
+пустое содержимое. Ещё одно замечание к исходнику — на стороне 2 по всем четырём
+краям идёт тёмная линия толщиной 2 px (0,28 мм), на стороне 1 её нет.
