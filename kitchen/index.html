@@ -28,62 +28,55 @@
 
   .page{
     min-height:100vh; min-height:100svh; display:flex; flex-direction:column;
-    padding:clamp(24px,5vw,56px);
-    padding-left:max(clamp(24px,5vw,56px),env(safe-area-inset-left));
-    padding-right:max(clamp(24px,5vw,56px),env(safe-area-inset-right));
+    padding:clamp(16px,3.5vh,48px) clamp(20px,5vw,56px);
+    padding-left:max(clamp(20px,5vw,56px),env(safe-area-inset-left));
+    padding-right:max(clamp(20px,5vw,56px),env(safe-area-inset-right));
   }
 
   .logo{display:flex; justify-content:center;}
   .logo__lockup{display:flex; align-items:center; gap:14px;}
-  .logo__mark{width:clamp(44px,8vw,62px); height:auto; display:block;}
-  .logo__word{font-weight:600; font-size:clamp(24px,6vw,34px); letter-spacing:.18em; line-height:.95; color:var(--beige);}
+  .logo__mark{width:clamp(36px,min(8vw,6.5vh),62px); height:auto; display:block;}
+  .logo__word{font-weight:600; font-size:clamp(20px,min(6vw,3.6vh),34px); letter-spacing:.18em; line-height:.95; color:var(--beige);}
   .logo__sub{font-family:'Montserrat',sans-serif; font-weight:600; font-size:clamp(7px,1.6vw,9px); letter-spacing:.3em; text-transform:uppercase; color:rgba(242,235,221,.6); margin-top:6px;}
 
   .hero{
     flex:1; display:flex; flex-direction:column;
     align-items:center; justify-content:center; text-align:center;
-    padding:clamp(40px,8vw,64px) 0;
+    padding:clamp(14px,3vh,40px) 0;
   }
-  .hero__eyebrow{font-family:'Montserrat',sans-serif; font-size:clamp(11px,3vw,13px); font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--terra-soft); margin-bottom:clamp(22px,5vw,34px);}
-  .hero__title{font-family:'Playfair Display',serif; font-weight:500; font-size:clamp(40px,10vw,96px); line-height:1.0; color:var(--beige); max-width:13ch;}
+  .hero__eyebrow{font-family:'Montserrat',sans-serif; font-size:clamp(10px,min(3vw,1.6vh),13px); font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--terra-soft); margin-bottom:clamp(10px,2.4vh,28px);}
+  .hero__title{font-family:'Playfair Display',serif; font-weight:500; font-size:clamp(32px,min(9vw,8vh),88px); line-height:1.02; color:var(--beige);}
   .hero__title em{font-style:italic; color:var(--terra-soft);}
-  .hero__lede{font-size:clamp(15px,4vw,20px); line-height:1.55; color:rgba(242,235,221,.75); margin-top:clamp(20px,5vw,32px); max-width:560px;}
-  .hero__rule{width:60px; height:2px; background:var(--terra); margin-top:clamp(30px,6vw,44px);}
+  .hero__lede{font-size:clamp(14px,min(4vw,2.1vh),19px); line-height:1.5; color:rgba(242,235,221,.75); margin-top:clamp(10px,2.4vh,26px); max-width:560px;}
+  .hero__rule{width:60px; height:2px; background:var(--terra); margin-top:clamp(14px,3vh,36px);}
 
-  .brands{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:clamp(28px,6vw,64px); margin-top:clamp(30px,6vw,44px); width:100%;}
+  .brands{--bh:clamp(76px,15vh,150px); display:flex; justify-content:center; align-items:center; gap:clamp(20px,5vw,64px); margin-top:clamp(14px,3vh,36px); width:100%;}
   .brand{display:flex; align-items:center; justify-content:center;}
-  .brand + .brand{border-left:1px solid rgba(242,235,221,.22); padding-left:clamp(28px,6vw,64px);}
-  .brand__logo{display:flex; align-items:center; justify-content:center; height:150px;}
-  .brand__img{height:150px; width:auto; display:block;}
-  .brand__logo--astrum{flex-direction:column; gap:16px;}
-  .brand__mark{width:auto; height:72px; display:block;}
+  .brand + .brand{border-left:1px solid rgba(242,235,221,.22); padding-left:clamp(20px,5vw,64px);}
+  .brand__logo{display:flex; align-items:center; justify-content:center; height:var(--bh);}
+  .brand__img{height:var(--bh); width:auto; display:block;}
+  .brand__logo--astrum{flex-direction:column; gap:calc(var(--bh) * .1);}
+  .brand__mark{width:auto; height:calc(var(--bh) * .48); display:block;}
   .brand__logo--astrum > div{display:flex; flex-direction:column; align-items:center;}
-  .brand__word{font-weight:500; font-size:34px; letter-spacing:.24em; line-height:1; color:var(--beige); margin-right:-.24em;}
-  .brand__sub{font-family:'Montserrat',sans-serif; font-weight:500; font-size:12px; letter-spacing:.7em; text-transform:uppercase; color:rgba(242,235,221,.8); margin-top:12px; margin-right:-.7em;}
-  .contact{border-top:1px solid rgba(242,235,221,.2); padding-top:clamp(22px,5vw,34px);}
-  .contact__row{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:22px; max-width:1100px; margin:0 auto; width:100%;}
-  .contact__title{font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--terra); margin-bottom:14px;}
-  .contact__items{display:flex; flex-wrap:wrap; gap:clamp(18px,5vw,48px);}
-  .contact__label{font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(242,235,221,.5); margin-bottom:6px;}
-  .contact__value{font-size:clamp(16px,4.5vw,22px); color:var(--beige);}
+  .brand__word{font-weight:500; font-size:calc(var(--bh) * .225); letter-spacing:.24em; line-height:1; color:var(--beige); margin-right:-.24em;}
+  .brand__sub{font-family:'Montserrat',sans-serif; font-weight:500; font-size:calc(var(--bh) * .08); letter-spacing:.7em; text-transform:uppercase; color:rgba(242,235,221,.8); margin-top:calc(var(--bh) * .08); margin-right:-.7em;}
+
+  .contact{border-top:1px solid rgba(242,235,221,.2); padding-top:clamp(12px,2.6vh,32px);}
+  .contact__row{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:clamp(10px,2vh,22px); max-width:1100px; margin:0 auto; width:100%;}
+  .contact__title{font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--terra); margin-bottom:clamp(6px,1.4vh,14px);}
+  .contact__items{display:flex; flex-wrap:wrap; gap:clamp(10px,2vh,18px) clamp(18px,4vw,48px);}
+  .contact__label{font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(242,235,221,.5); margin-bottom:4px;}
+  .contact__value{font-size:clamp(14px,min(4vw,2.2vh),20px); color:var(--beige);}
   .contact__value--email{word-break:break-word;}
-  .contact__value--addr{display:block; font-size:clamp(15px,4vw,18px); line-height:1.4;}
+  .contact__value--addr{display:block; font-size:clamp(13px,min(3.6vw,1.9vh),17px); line-height:1.4;}
   .contact__locality{font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:rgba(242,235,221,.45);}
 
   @media (max-width:600px){
-    .hero{padding:clamp(28px,7vw,44px) 0;}
-    .brands{flex-direction:column; gap:28px;}
-    .brand + .brand{border-left:0; padding-left:0; border-top:1px solid rgba(242,235,221,.22); padding-top:28px;}
-    .brand__img{height:130px;}
-    .brand__mark{height:64px;}
-    .brand__word{font-size:30px;}
-    .brand__sub{font-size:11px; margin-top:10px;}
-    .contact__row{flex-direction:column; align-items:center; text-align:center; gap:18px;}
+    .brands{--bh:clamp(70px,12vh,110px);}
+    .contact__row{flex-direction:column; align-items:center; text-align:center;}
     .contact__items{justify-content:center;}
-  }
-  @media (max-height:560px){
-    .page{min-height:0;}
-    .hero{flex:0 0 auto; padding:clamp(28px,6vh,48px) 0;}
+    .contact__value--addr br{display:none;}
+    .contact__locality{display:none;}
   }
   @media (prefers-reduced-motion:reduce){ a{transition:none;} }
 </style>
@@ -103,7 +96,7 @@
 
     <section class="hero">
       <p class="hero__eyebrow">Coming soon</p>
-      <h1 class="hero__title">One kitchen. <em>Every</em> ASTRUM plate.</h1>
+      <h1 class="hero__title">One kitchen.<br><em>Every</em> ASTRUM plate.</h1>
       <p class="hero__lede">The commissary kitchen behind our cafe and delivery brands in Los Angeles. Everything is made from scratch here, every day. We're almost ready to open.</p>
       <div class="hero__rule"></div>
       <div class="brands">
@@ -139,7 +132,7 @@
             </div>
             <div>
               <p class="contact__label">Address</p>
-              <a class="contact__value contact__value--addr" href="https://maps.google.com/?q=7516+San+Fernando+Rd+Unit+A,+Sun+Valley,+CA+91352" target="_blank" rel="noopener">7516 San Fernando Rd, Unit A<br>Sun Valley, CA 91352</a>
+              <a class="contact__value contact__value--addr" href="https://maps.google.com/?q=7516+San+Fernando+Rd+Unit+A,+Sun+Valley,+CA+91352" target="_blank" rel="noopener">7516 San Fernando Rd, Unit A,<br> Sun Valley, CA 91352</a>
             </div>
           </div>
         </div>
