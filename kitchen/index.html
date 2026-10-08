@@ -54,10 +54,11 @@
   .brand + .brand{border-left:1px solid rgba(242,235,221,.22); padding-left:clamp(28px,6vw,64px);}
   .brand__logo{display:flex; align-items:center; justify-content:center; height:150px;}
   .brand__img{height:150px; width:auto; display:block;}
-  .brand__logo--astrum{gap:12px;}
-  .brand__mark{width:52px; height:auto; display:block;}
-  .brand__word{font-weight:600; font-size:28px; letter-spacing:.18em; line-height:.95; color:var(--beige); text-align:left;}
-  .brand__sub{font-family:'Playfair Display',serif; font-style:italic; font-size:22px; color:var(--terra-soft); margin-top:4px; text-align:left;}
+  .brand__logo--astrum{gap:18px; align-items:stretch; height:auto;}
+  .brand__mark{width:auto; height:84px; display:block;}
+  .brand__logo--astrum > div{display:flex; flex-direction:column; justify-content:center;}
+  .brand__word{font-weight:500; font-size:38px; letter-spacing:.16em; line-height:1; color:var(--beige); margin-right:-.16em;}
+  .brand__sub{font-family:'Montserrat',sans-serif; font-weight:500; font-size:13px; letter-spacing:.7em; text-transform:uppercase; color:rgba(242,235,221,.8); margin-top:14px; text-align:center; margin-right:-.7em;}
   .contact{border-top:1px solid rgba(242,235,221,.2); padding-top:clamp(22px,5vw,34px);}
   .contact__row{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:22px; max-width:1100px; margin:0 auto; width:100%;}
   .contact__title{font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--terra); margin-bottom:14px;}
@@ -72,7 +73,10 @@
     .hero{padding:clamp(28px,7vw,44px) 0;}
     .brands{flex-direction:column; gap:28px;}
     .brand + .brand{border-left:0; padding-left:0; border-top:1px solid rgba(242,235,221,.22); padding-top:28px;}
-    .brand__logo,.brand__img{height:130px;}
+    .brand__img{height:130px;}
+    .brand__mark{height:70px;}
+    .brand__word{font-size:32px;}
+    .brand__sub{font-size:11px; margin-top:12px;}
     .contact__row{flex-direction:column; align-items:center; text-align:center; gap:18px;}
     .contact__items{justify-content:center;}
   }
